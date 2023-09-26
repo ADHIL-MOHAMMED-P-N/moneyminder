@@ -4,6 +4,7 @@ import {
   AreaChartOutlined,
   DollarOutlined,
   PaperClipOutlined,
+  UserOutlined,
   WalletOutlined,
 } from "@ant-design/icons";
 
@@ -28,19 +29,14 @@ const menuItems = [
     label: <Link to="/report">Report</Link>,
     icon: <PaperClipOutlined />,
   },
+  {
+    key: "account",
+    label: <Link to="/account">Account</Link>,
+    icon: <UserOutlined />,
+  },
 ];
 const MainSideNav = () => {
-  return (
-    <div>
-      <Menu
-        style={{
-          width: 300,
-        }}
-        items={menuItems}
-        mode="inline"
-      />
-    </div>
-  );
+  return <Menu className="custom-sidemenu" items={menuItems} mode="inline" />;
 };
 
 export default MainSideNav;

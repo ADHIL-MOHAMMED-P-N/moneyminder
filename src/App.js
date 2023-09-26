@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
 import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
+import Account from "./pages/Account.js";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="expense" element={<Expense />} />
           <Route path="income" element={<Income />} />
           <Route path="report" element={<Report />} />
+          <Route path="account" element={<Account />} />
         </Route>
         {/* error routes */}
         <Route path="/404" element={<Error404 />} />
