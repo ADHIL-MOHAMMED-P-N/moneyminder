@@ -1,4 +1,4 @@
-export const incomeData = [
+export const income = [
   {
     date: "2023-10-05",
     source: "Salary",
