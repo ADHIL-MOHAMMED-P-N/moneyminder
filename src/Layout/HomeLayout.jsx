@@ -10,22 +10,16 @@ const HomeLayout = () => {
     height: 64,
     paddingInline: 50,
     lineHeight: "64px",
-    backgroundColor: "#7dbcea",
   };
   const contentStyle = {
     minHeight: 120,
-    lineHeight: "120px",
-    color: "#fff",
-    backgroundColor: "#108ee9",
   };
   const siderStyle = {
     lineHeight: "120px",
     color: "#fff",
-    backgroundColor: "#3ba0e9",
   };
   const footerStyle = {
     color: "#fff",
-    backgroundColor: "#7dbcea",
   };
   return (
     <Layout style={{ height: "100vh" }}>
