@@ -1,10 +1,9 @@
 import React from "react";
 import SummaryCard from "../components/Dashboard/SummaryCard";
-
+import TransactionStatistics from "../components/Dashboard/TransactionStatistics";
 const Dashboard = () => {
   return (
     <div>
-      Dashboard
       <SummaryCard
         subtitle="Income"
         title="$59,839.80"
@@ -17,6 +16,7 @@ const Dashboard = () => {
         percentage={-12.2}
         paraValue={"$6,241.00"}
       />
+      <TransactionStatistics />
     </div>
   );
 };

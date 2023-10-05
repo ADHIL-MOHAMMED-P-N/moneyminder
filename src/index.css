@@ -14,3 +14,8 @@ code {
 .custom-sidemenu.ant-menu {
   height: 100%;
 }
+
+:root {
+  --color-blue: #1677ff;
+  --color-blue: #b5cef2;
+}
