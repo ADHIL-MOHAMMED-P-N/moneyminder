@@ -1,6 +1,7 @@
 import React from "react";
 import SummaryCard from "../components/Dashboard/SummaryCard";
 import TransactionStatistics from "../components/Dashboard/TransactionStatistics";
+import BalanceCard from "../components/Dashboard/BalanceCard";
 const Dashboard = () => {
   return (
     <div>
@@ -17,6 +18,7 @@ const Dashboard = () => {
         paraValue={"$6,241.00"}
       />
       <TransactionStatistics />
+      <BalanceCard />
     </div>
   );
 };
