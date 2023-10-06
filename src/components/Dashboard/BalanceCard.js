@@ -1,4 +1,4 @@
-import { Card, Typography, Space, Button, Progress } from "antd";
+import { Card, Typography, Space, Button, Progress, Tooltip } from "antd";
 import { DollarOutlined, WalletOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 const { Title } = Typography;
@@ -63,7 +63,9 @@ const BalanceCard = () => {
         </Space>
         <div style={{ marginTop: 10 }}>
           <p style={paraStyle}>Balace Today</p>
-          <Progress percent={30} />
+          <Tooltip title={30}>
+            <Progress percent={30} />
+          </Tooltip>
         </div>
       </Card>
     </div>
