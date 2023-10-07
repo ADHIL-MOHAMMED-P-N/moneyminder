@@ -14,8 +14,12 @@ code {
 .custom-sidemenu.ant-menu {
   height: 100%;
 }
-
+/* colours used */
 :root {
   --color-blue: #1677ff;
   --color-blue: #b5cef2;
+}
+/* ant-d modifications */
+.ant-table-cell {
+  padding: 5px 10px !important;
 }

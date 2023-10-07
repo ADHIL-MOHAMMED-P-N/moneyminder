@@ -1,3 +1,4 @@
+/* implement pagination and filter */
 import { Space, Table, Dropdown, Button, Badge } from "antd";
 import {
   CalendarOutlined,
@@ -9,13 +10,11 @@ import {
   SnippetsOutlined,
   TransactionOutlined,
 } from "@ant-design/icons";
-const textStyle = { fontSize: 16, fontWeight: "bold" };
+const textStyle = { fontSize: 14, fontWeight: 500, margin: 0 };
 const TableHeader = ({ title, icon }) => {
   return (
     <Space>
-      <h3 style={{ fontWeight: "500", color: "gray", fontSize: 14 }}>
-        {title}
-      </h3>
+      <h3 style={{ fontWeight: 400, color: "gray", fontSize: 12 }}>{title}</h3>
       {icon ? icon : null}
     </Space>
   );
@@ -24,12 +23,12 @@ const ActionDropdown = () => {
   const items = [
     {
       key: "1",
-      label: <p>Edit</p>,
+      label: <p style={{ margin: 0 }}>Edit</p>,
       icon: <EditOutlined />,
     },
     {
       key: "2",
-      label: <p>Delete</p>,
+      label: <p style={{ margin: 0 }}>Delete</p>,
       icon: <DeleteOutlined />,
     },
   ];
@@ -39,7 +38,7 @@ const ActionDropdown = () => {
         items,
       }}
     >
-      <Button shape="default" icon={<SmallDashOutlined />} />
+      <Button icon={<SmallDashOutlined />} />
     </Dropdown>
   );
 };
@@ -48,7 +47,10 @@ const CustomTable = () => {
   const columns = [
     {
       title: (
-        <TableHeader title="Transaction Date" icon={<CalendarOutlined />} />
+        <TableHeader
+          title="Transaction Date"
+          icon={<CalendarOutlined style={{ color: "gray" }} />}
+        />
       ),
       dataIndex: "date",
       key: "date",
@@ -56,33 +58,53 @@ const CustomTable = () => {
     },
     {
       title: (
-        <TableHeader title="Transaction Name" icon={<TransactionOutlined />} />
+        <TableHeader
+          title="Transaction Name"
+          icon={<TransactionOutlined style={{ color: "gray" }} />}
+        />
       ),
       dataIndex: "name",
       key: "name",
       render: (text) => <p style={textStyle}>{text}</p>,
     },
     {
-      title: <TableHeader title="Amount" icon={<DollarOutlined />} />,
+      title: (
+        <TableHeader
+          title="Amount"
+          icon={<DollarOutlined style={{ color: "gray" }} />}
+        />
+      ),
       dataIndex: "amount",
       key: "amount",
       render: (_, record) => <p style={textStyle}>{`$${record.amount}`}</p>,
     },
     {
-      title: <TableHeader title="Status" icon={<MonitorOutlined />} />,
+      title: (
+        <TableHeader
+          title="Status"
+          icon={<MonitorOutlined style={{ color: "gray" }} />}
+        />
+      ),
       key: "status",
       dataIndex: "status",
       render: (_, record) => (
         <Badge
           style={{
-            backgroundColor: record.status === "income" ? "#52c41a" : "#ff4d4f",
+            backgroundColor: record.status === "income" ? "#E9F9F1" : "#FCEBEB",
+            color: record.status === "income" ? "#1CA748" : "#F10509",
+            fontWeight: 500,
           }}
           count={record.status}
         />
       ),
     },
     {
-      title: <TableHeader title="Note" icon={<SnippetsOutlined />} />,
+      title: (
+        <TableHeader
+          title="Note"
+          icon={<SnippetsOutlined style={{ color: "gray" }} />}
+        />
+      ),
       key: "note",
       dataIndex: "note",
       render: (text) => <p style={textStyle}>{text}</p>,

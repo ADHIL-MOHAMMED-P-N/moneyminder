@@ -34,7 +34,7 @@ const HomeLayout = () => {
         <Content style={contentStyle}>
           <div
             style={{
-              padding: 30,
+              padding: 40,
             }}
           >
             <Outlet />
