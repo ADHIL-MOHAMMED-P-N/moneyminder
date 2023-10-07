@@ -31,7 +31,7 @@ const BalanceCard = () => {
         title={<CardTop />}
         extra={<p style={{ ...paraStyle, fontSize: 12 }}>From Last Month</p>}
         style={{
-          width: 300,
+          /*   width: 300, */
           padding: 10,
         }}
       >

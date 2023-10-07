@@ -64,7 +64,7 @@ const TransactionStatistics = () => {
         title={<CardTitle />}
         extra={<GraphIndex />}
         style={{
-          width: 400,
+          /*   width: 400, */
           padding: 10,
         }}
       >

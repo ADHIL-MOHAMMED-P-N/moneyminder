@@ -19,10 +19,11 @@ const HomeLayout = () => {
     color: "#fff",
   };
   const footerStyle = {
+    backgroundColor: "#001529",
     color: "#fff",
   };
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ minHeight: "100vh" }}>
       <Header style={headerStyle}>
         <MainHeader />
       </Header>
@@ -31,7 +32,13 @@ const HomeLayout = () => {
           <MainSideNav />
         </Sider>
         <Content style={contentStyle}>
-          <Outlet />
+          <div
+            style={{
+              padding: 30,
+            }}
+          >
+            <Outlet />
+          </div>
         </Content>
       </Layout>
       <Footer style={footerStyle}>Footer</Footer>

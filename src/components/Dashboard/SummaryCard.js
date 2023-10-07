@@ -73,7 +73,7 @@ const SummaryCard = ({ subtitle, title, paraValue, percentage }) => {
         title={<CardTitle title={title} subtitle={subtitle} />}
         extra={<Percentage percentage={percentage} />}
         style={{
-          width: 300,
+          /*  width: 300, */
           padding: 10,
         }}
       >
