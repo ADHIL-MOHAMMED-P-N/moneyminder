@@ -2,7 +2,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomeLayout from "./Layout/HomeLayout";
 import Dashboard from "./pages/Dashboard";
 import Expense from "./pages/Expense";
+import SingleExpense from "./pages/SingleExpense";
 import Income from "./pages/Income";
+import SingleIncome from "./pages/SingleIncome";
 import Report from "./pages/Report";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
@@ -25,7 +27,9 @@ function App() {
           {/* to navigate from / for /dashboard */}
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="expense" element={<Expense />} />
+          <Route path="expense/:expenseId" element={<SingleExpense />} />
           <Route path="income" element={<Income />} />
+          <Route path="income/:incomeId" element={<SingleIncome />} />
           <Route path="report" element={<Report />} />
           <Route path="account" element={<Account />} />
         </Route>
