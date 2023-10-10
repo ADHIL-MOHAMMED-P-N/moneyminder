@@ -1,4 +1,5 @@
 /* implement pagination and filter */
+import { Link, useNavigate } from "react-router-dom";
 import { Space, Table, Dropdown, Button, Badge } from "antd";
 import {
   CalendarOutlined,
@@ -11,6 +12,7 @@ import {
   TransactionOutlined,
 } from "@ant-design/icons";
 const textStyle = { fontSize: 14, fontWeight: 500, margin: 0 };
+/* const linkStyle = { color: "black" }; */
 const TableHeader = ({ title, icon }) => {
   return (
     <Space>
@@ -44,6 +46,7 @@ const ActionDropdown = () => {
 };
 
 const CustomTable = () => {
+  const navigate = useNavigate();
   const columns = [
     {
       title: (
@@ -154,7 +157,19 @@ const CustomTable = () => {
   ];
   return (
     <>
-      <Table columns={columns} dataSource={data} />
+      <Table
+        onRow={(record) => {
+          return {
+            onClick: (event) => {
+              navigate(
+                `/${record.status}/${record.name}`
+              ); /* later change record.name to record id */
+            },
+          };
+        }}
+        columns={columns}
+        dataSource={data}
+      />
     </>
   );
 };

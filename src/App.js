@@ -28,6 +28,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="expense" element={<Expense />} />
           <Route path="expense/:expenseId" element={<SingleExpense />} />
+          {/* no shared ui so no need to nest expense/id inside expense */}
           <Route path="income" element={<Income />} />
           <Route path="income/:incomeId" element={<SingleIncome />} />
           <Route path="report" element={<Report />} />
