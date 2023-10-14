@@ -9,11 +9,20 @@ import ExpenseContext from "../context/ExpenseContext";
 //finding current month
 const today = new Date();
 const month = today.getMonth() + 1;
-console.log(month);
 
 const Dashboard = () => {
   const { expense } = useContext(ExpenseContext);
-  const montheExpense = expense.filter((exp) => exp.date);
+  const monthExpense = expense.filter((exp) => {
+    const expDate = new Date(exp.date);
+    const expMonth = expDate.getMonth() + 1;
+    if (expMonth === month) {
+      return true;
+    } else return false;
+  });
+  const monthExpenseAmount = monthExpense
+    .map((item) => item.amount)
+    .reduce((acc, item) => (acc += item), 0);
+  console.log(monthExpenseAmount);
   return (
     <>
       {/* Row-1 cards */}
