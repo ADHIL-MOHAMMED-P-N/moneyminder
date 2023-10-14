@@ -1,10 +1,19 @@
-import React from "react";
+import { useContext } from "react";
 import SummaryCard from "../components/Dashboard/SummaryCard";
 import TransactionStatistics from "../components/Dashboard/TransactionStatistics";
 import BalanceCard from "../components/Dashboard/BalanceCard";
 import RecentTransactionTable from "../components/Dashboard/RecentTransactionTable";
 import { Col, Row } from "antd";
+import ExpenseContext from "../context/ExpenseContext";
+
+//finding current month
+const today = new Date();
+const month = today.getMonth() + 1;
+console.log(month);
+
 const Dashboard = () => {
+  const { expense } = useContext(ExpenseContext);
+  const montheExpense = expense.filter((exp) => exp.date);
   return (
     <>
       {/* Row-1 cards */}
