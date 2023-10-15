@@ -45,7 +45,7 @@ const ActionDropdown = () => {
   );
 };
 
-const CustomTable = () => {
+const CustomTable = ({ data }) => {
   const navigate = useNavigate();
   const columns = [
     {
@@ -108,8 +108,8 @@ const CustomTable = () => {
           icon={<SnippetsOutlined style={{ color: "gray" }} />}
         />
       ),
-      key: "note",
-      dataIndex: "note",
+      key: "description",
+      dataIndex: "description",
       render: (text) => <p style={textStyle}>{text}</p>,
     },
     {
@@ -118,43 +118,7 @@ const CustomTable = () => {
       render: () => <ActionDropdown />,
     },
   ];
-  const data = [
-    {
-      date: "01-02-2023",
-      name: "Food",
-      amount: 200,
-      status: "income",
-      note: "Lunch Canteen",
-    },
-    {
-      date: "02-02-2023",
-      name: "Transportation",
-      amount: 50,
-      status: "expense",
-      note: "Bus fare",
-    },
-    {
-      date: "03-02-2023",
-      name: "Salary",
-      amount: 1500,
-      status: "income",
-      note: "Monthly salary",
-    },
-    {
-      date: "04-02-2023",
-      name: "Shopping",
-      amount: 300,
-      status: "expense",
-      note: "Clothing",
-    },
-    {
-      date: "05-02-2023",
-      name: "Utilities",
-      amount: 100,
-      status: "expense",
-      note: "Electricity bill",
-    },
-  ];
+
   return (
     <>
       <Table

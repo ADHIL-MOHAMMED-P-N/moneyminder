@@ -60,7 +60,6 @@ const Percentage = ({ percentage }) => {
   );
 }; */
 const SummaryCard = ({ subtitle, transaction, paraValue, percentage }) => {
-  console.log(transaction);
   //finding current month
   const today = new Date();
   const month = today.getMonth() + 1;
