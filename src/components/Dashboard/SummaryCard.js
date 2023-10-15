@@ -1,13 +1,9 @@
 /* summary card about income spending balance: used in dahsboard */
 import { Card, Typography } from "antd";
 
-import { Chart as ChartJS } from "chart.js/auto"; /* mandatory import for showing chart */
-
 const { Title } = Typography;
 const { Meta } = Card;
-
 const paraStyle = { margin: 0, fontWeight: 400, color: "rgba(0, 0, 0, 0.45)" };
-
 const CardTitle = ({ title, subtitle }) => {
   return (
     <>

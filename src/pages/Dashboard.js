@@ -5,22 +5,11 @@ import BalanceCard from "../components/Dashboard/BalanceCard";
 import RecentTransactionTable from "../components/Dashboard/RecentTransactionTable";
 import { Col, Row } from "antd";
 import ExpenseContext from "../context/ExpenseContext";
+import IncomeContext from "../context/IncomeContext";
 
 const Dashboard = () => {
   const { expense } = useContext(ExpenseContext);
-  // finding monthlyexpense from all
-  /*  const monthExpense = expense.filter((exp) => {
-    const expDate = new Date(exp.date);
-    const expMonth = expDate.getMonth() + 1;
-    if (expMonth === month) {
-      return true;
-    } else return false;
-  });
-  const totalMonthExpense = monthExpense
-    .map((item) => item.amount)
-    .reduce((acc, item) => acc + item, 0)
-    .toFixed(2); */
-  /*later compare year also ------expyear should be current year only---------------------- */
+  const { income } = useContext(IncomeContext);
   return (
     <>
       {/* Row-1 cards */}
@@ -31,7 +20,7 @@ const Dashboard = () => {
               subtitle="Income"
               percentage={20}
               paraValue={"$8,219.00"}
-              transaction={expense} /* change to income */
+              transaction={income} /* change to income */
             />
           </div>
           <div>
