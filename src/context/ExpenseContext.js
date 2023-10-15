@@ -22,10 +22,11 @@ export function ExpenseProvider({ children }) {
       amount: 40.0,
       description: "Filled up the car's gas tank.",
     },
+
     {
-      date: "2023-10-16",
-      name: "Dinner with Friends",
-      amount: 80.0,
+      date: "2023-05-21",
+      name: "Dinner with Mother",
+      amount: 50.0,
       description: "Shared a meal with friends at a restaurant.",
     },
   ]);

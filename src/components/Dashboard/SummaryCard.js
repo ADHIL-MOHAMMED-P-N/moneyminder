@@ -1,7 +1,6 @@
 /* summary card about income spending balance: used in dahsboard */
 import { Card, Typography } from "antd";
-import { Line } from "react-chartjs-2";
-import { incomeMonthly } from "../../Data/IncomeMonthly";
+
 import { Chart as ChartJS } from "chart.js/auto"; /* mandatory import for showing chart */
 
 const { Title } = Typography;
@@ -64,13 +63,32 @@ const Percentage = ({ percentage }) => {
     </div>
   );
 }; */
-const SummaryCard = ({ subtitle, title, paraValue, percentage }) => {
+const SummaryCard = ({ subtitle, transaction, paraValue, percentage }) => {
+  console.log(transaction);
+  //finding current month
+  const today = new Date();
+  const month = today.getMonth() + 1;
+  // finding monthlyexpense from all
+  const monthTransaction = transaction.filter((trans) => {
+    const transDate = new Date(trans.date);
+    const transMonth = transDate.getMonth() + 1;
+    if (transMonth === month) {
+      return true;
+    } else return false;
+  });
+  const totalMonthTransaction = monthTransaction
+    .map((item) => item.amount)
+    .reduce((acc, item) => acc + item, 0)
+    .toFixed(2);
+
   return (
     <>
       <Card
         size="small"
         loading={false}
-        title={<CardTitle title={title} subtitle={subtitle} />}
+        title={
+          <CardTitle title={`$${totalMonthTransaction}`} subtitle={subtitle} />
+        }
         extra={<Percentage percentage={percentage} />}
         style={{
           /*  width: 300, */
