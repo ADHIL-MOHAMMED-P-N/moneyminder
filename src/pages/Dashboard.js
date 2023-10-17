@@ -33,7 +33,7 @@ const Dashboard = () => {
           </div>
         </Col>
         <Col span={8}>
-          <TransactionStatistics />
+          <TransactionStatistics income={income} expense={expense} />
         </Col>
         <Col span={8}>
           <BalanceCard />

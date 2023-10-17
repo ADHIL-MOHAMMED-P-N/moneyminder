@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, Typography, Space } from "antd";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto"; /* mandatory import for showing chart */
+import { InfoOutlined } from "@ant-design/icons";
 const { Title } = Typography;
 
 const paraStyle = { margin: 0, fontWeight: 400, color: "rgba(0, 0, 0, 0.45)" };
@@ -32,7 +33,17 @@ const GraphIndex = () => {
   );
 };
 
-const TransactionStatistics = () => {
+const TransactionStatistics = ({ income, expense }) => {
+  console.log(income);
+  const monthlytotal = income.map((item) => {
+    const date = new Date(item.date);
+    const month = date.getMonth() + 1;
+    return {
+      month,
+    };
+  });
+  console.log(monthlytotal);
+
   const [transactions, setTransactions] = useState([
     { month: "January", monthlyExpense: 1000, monthlyIncome: 1200 },
     { month: "february", monthlyExpense: 1500, monthlyIncome: 500 },
