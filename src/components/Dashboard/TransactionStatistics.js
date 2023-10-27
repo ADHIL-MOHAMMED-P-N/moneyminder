@@ -34,16 +34,30 @@ const GraphIndex = () => {
 };
 
 const TransactionStatistics = ({ income, expense }) => {
-  console.log(income);
-  const monthlytotal = income.map((item) => {
-    const date = new Date(item.date);
-    const month = date.getMonth() + 1;
+  const newInome = income.map((item) => {
     return {
-      month,
+      name: item.name,
+      amount: item.amount,
+      date: new Date(item.date),
+      desc: item.description,
+      status: "income",
     };
   });
-  console.log(monthlytotal);
-
+  const newExpense = expense.map((item) => {
+    return {
+      name: item.name,
+      amount: item.amount,
+      date: new Date(item.date),
+      desc: item.description,
+      status: "expense",
+    };
+  });
+  const transactionsCombined = newInome
+    .concat(newExpense)
+    .sort(function (a, b) {
+      return b.date - a.date;
+    });
+  console.log(transactionsCombined);
   const [transactions, setTransactions] = useState([
     { month: "January", monthlyExpense: 1000, monthlyIncome: 1200 },
     { month: "february", monthlyExpense: 1500, monthlyIncome: 500 },
