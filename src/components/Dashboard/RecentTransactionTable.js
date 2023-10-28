@@ -11,7 +11,7 @@ const RecentTransactionTable = () => {
     ...item,
     status: "income",
   }));
-  const newExpense = income.map((item) => ({
+  const newExpense = expense.map((item) => ({
     ...item,
     status: "expense",
   }));

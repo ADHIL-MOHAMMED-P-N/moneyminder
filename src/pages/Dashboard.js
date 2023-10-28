@@ -36,7 +36,7 @@ const Dashboard = () => {
           <TransactionStatistics income={income} expense={expense} />
         </Col>
         <Col span={8}>
-          <BalanceCard />
+          <BalanceCard income={income} expense={expense} />
         </Col>
       </Row>
       {/* Row - 2 Table and saving plans */}

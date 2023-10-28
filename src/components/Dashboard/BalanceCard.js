@@ -1,11 +1,12 @@
 import { Card, Typography, Space, Button, Progress, Tooltip } from "antd";
 import { DollarOutlined, WalletOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 const { Title } = Typography;
 
 const paraStyle = { margin: 0, fontWeight: 400, color: "rgba(0, 0, 0, 0.45)" };
 
-const CardTop = () => {
+const CardTop = ({ balance }) => {
   return (
     <>
       <p style={paraStyle}>Total Balance</p>
@@ -13,7 +14,7 @@ const CardTop = () => {
         style={{ margin: 0, marginBottom: 10, fontWeight: "bold" }}
         level={3}
       >
-        $21,211.00
+        ${balance}
       </Title>
       <p style={paraStyle}>
         Balace Last Month<span style={{ color: "#000" }}> $11,000</span>
@@ -22,13 +23,35 @@ const CardTop = () => {
   );
 };
 
-const BalanceCard = () => {
+const BalanceCard = ({ income, expense }) => {
+  /* remove redudant code,  */
+  const month = new Date().getMonth();
+  const currentMonthIncome = income
+    .filter((item) => {
+      const date = new Date(item.date);
+      return date.getMonth() === month;
+    })
+    .reduce((acc, item) => acc + item.amount, 0)
+    .toFixed(2);
+
+  const currentMonthExpense = expense
+    .filter((item) => {
+      const date = new Date(item.date);
+      return date.getMonth() === month;
+    })
+    .reduce((acc, item) => acc + item.amount, 0)
+    .toFixed(2);
+
+  const [balance, setBalance] = useState(
+    currentMonthIncome - currentMonthExpense
+  );
+
   return (
     <div>
       <Card
         size="small"
         loading={false}
-        title={<CardTop />}
+        title={<CardTop balance={balance} />}
         extra={<p style={{ ...paraStyle, fontSize: 12 }}>From Last Month</p>}
         style={{
           /*   width: 300, */
