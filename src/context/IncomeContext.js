@@ -34,6 +34,12 @@ export function IncomeProvider({ children }) {
       amount: 75.0,
       description: "Received a refund for a purchase.",
     },
+    {
+      date: "2023-02-11",
+      name: "Freelance",
+      amount: 400,
+      description: "Web development work",
+    },
   ]);
   return (
     <IncomeContext.Provider value={{ income }}>

@@ -57,13 +57,42 @@ const TransactionStatistics = ({ income, expense }) => {
     .sort(function (a, b) {
       return b.date - a.date;
     });
-  console.log(transactionsCombined);
-  const [transactions, setTransactions] = useState([
-    { month: "January", monthlyExpense: 1000, monthlyIncome: 1200 },
-    { month: "february", monthlyExpense: 1500, monthlyIncome: 500 },
-    { month: "March", monthlyExpense: 2700, monthlyIncome: 5000 },
-    { month: "April", monthlyExpense: 3500, monthlyIncome: 4000 },
-  ]);
+  const lastTransaction = [
+    { month: "January", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "February", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "March", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "April", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "May", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "June", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "July", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "August", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "September", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "October", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "November", monthlyExpense: 0, monthlyIncome: 0 },
+    { month: "December", monthlyExpense: 0, monthlyIncome: 0 },
+  ];
+
+  const today = new Date();
+  /*   console.log(transactionsCombined); */
+  /*  calculting the monthlyexpense and monthlyincome */
+  /* change logic into states and useeffects  */
+  for (let i = 0; i < transactionsCombined.length; i++) {
+    if (transactionsCombined[i].date.getFullYear() === today.getFullYear()) {
+      const transMonth = transactionsCombined[i].date.getMonth();
+      if (transactionsCombined[i].status === "expense") {
+        lastTransaction[transMonth].monthlyExpense +=
+          transactionsCombined[i].amount;
+      }
+      if (transactionsCombined[i].status === "income") {
+        lastTransaction[transMonth].monthlyIncome +=
+          transactionsCombined[i].amount;
+      }
+    }
+  }
+
+  /*  console.log(lastTransaction); */
+
+  const [transactions, setTransactions] = useState(lastTransaction);
   const chartData = {
     labels: transactions.map((trans) => trans.month),
     datasets: [
@@ -71,13 +100,13 @@ const TransactionStatistics = ({ income, expense }) => {
         label: "Expense",
         data: transactions.map((trans) => trans.monthlyExpense),
         backgroundColor: "#b5cef2",
-        borderRadius: 5,
+        borderRadius: 2,
       },
       {
         label: "Income",
         data: transactions.map((trans) => trans.monthlyIncome),
         backgroundColor: "#1677ff",
-        borderRadius: 5,
+        borderRadius: 2,
       },
     ],
   };
