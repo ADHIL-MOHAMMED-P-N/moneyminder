@@ -6,6 +6,7 @@ import {
   PaperClipOutlined,
   UserOutlined,
   WalletOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 
 const menuItems = [
@@ -25,10 +26,16 @@ const menuItems = [
     icon: <DollarOutlined />,
   },
   {
+    key: "borrowings",
+    label: <Link to="/borrowings">Borrowings</Link>,
+    icon: <UsergroupAddOutlined />,
+  },
+  {
     key: "report",
     label: <Link to="/report">Report</Link>,
     icon: <PaperClipOutlined />,
   },
+
   {
     key: "account",
     label: <Link to="/account">Account</Link>,

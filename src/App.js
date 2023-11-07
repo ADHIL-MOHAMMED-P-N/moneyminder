@@ -6,6 +6,7 @@ import SingleExpense from "./pages/SingleExpense";
 import Income from "./pages/Income";
 import SingleIncome from "./pages/SingleIncome";
 import Report from "./pages/Report";
+import Borrowings from "./pages/Borrowings";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
@@ -34,6 +35,7 @@ function App() {
               {/* no shared ui so no need to nest expense/id inside expense */}
               <Route path="income" element={<Income />} />
               <Route path="income/:incomeId" element={<SingleIncome />} />
+              <Route path="borrowings" element={<Borrowings />} />
               <Route path="report" element={<Report />} />
               <Route path="account" element={<Account />} />
             </Route>

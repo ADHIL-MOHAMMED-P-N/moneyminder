@@ -41,6 +41,12 @@ export function ExpenseProvider({ children }) {
       amount: 200.0,
       description: "Shared a meal with boss.",
     },
+    {
+      date: "2023-11-01",
+      name: "Lunch",
+      amount: 50.0,
+      description: "Lunch",
+    },
   ]);
   return (
     <ExpenseContext.Provider value={{ expense }}>
