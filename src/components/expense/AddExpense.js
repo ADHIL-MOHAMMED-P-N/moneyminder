@@ -22,12 +22,22 @@ const AddExpense = () => {
     };
     console.log(expense);
     addToExpense(newExpense);
+    setName("");
+    setAmount(0);
+    setNote("");
   };
   return (
     <>
       <div style={{ maxWidth: 400 }}>
         <Form layout="vertical">
-          <Form.Item label="Expense Name">
+          <Form.Item
+            label="Expense Name"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
             <Input
               type="text"
               placeholder="eg: Food"
@@ -58,7 +68,11 @@ const AddExpense = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" onClick={submitHandler}>
+            <Button
+              type="primary"
+              onClick={submitHandler}
+              disabled={name === "" || note === "" || amount == 0}
+            >
               Submit
             </Button>
           </Form.Item>
