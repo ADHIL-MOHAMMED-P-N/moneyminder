@@ -17,10 +17,10 @@ const AddExpense = () => {
     const newExpense = {
       date: `${year}-${month}-${day}`,
       name,
-      amount,
+      amount: +amount, //parsing to number
       description: note,
     };
-    console.log(expense);
+
     addToExpense(newExpense);
     setName("");
     setAmount(0);

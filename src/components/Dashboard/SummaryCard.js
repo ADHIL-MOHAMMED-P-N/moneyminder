@@ -67,10 +67,9 @@ const SummaryCard = ({ subtitle, transaction, paraValue, percentage }) => {
   const monthTransaction = transaction.filter((trans) => {
     const transDate = new Date(trans.date);
     const transMonth = transDate.getMonth() + 1;
-    if (transMonth === month) {
-      return true;
-    } else return false;
+    return transMonth === month;
   });
+
   const totalMonthTransaction = monthTransaction
     .map((item) => item.amount)
     .reduce((acc, item) => acc + item, 0)
