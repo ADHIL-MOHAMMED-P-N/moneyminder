@@ -1,9 +1,28 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button, Form, Input } from "antd";
+import ExpenseContext from "../../context/ExpenseContext";
+
 const AddExpense = () => {
+  const { addToExpense, expense } = useContext(ExpenseContext);
+
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(0);
   const [note, setNote] = useState("");
+
+  const submitHandler = () => {
+    const today = new Date();
+    let day = today.getDate();
+    let month = today.getMonth() + 1;
+    let year = today.getFullYear();
+    const newExpense = {
+      date: `${year}-${month}-${day}`,
+      name,
+      amount,
+      description: note,
+    };
+    console.log(expense);
+    addToExpense(newExpense);
+  };
   return (
     <>
       <div style={{ maxWidth: 400 }}>
@@ -39,7 +58,9 @@ const AddExpense = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Button type="primary">Submit</Button>
+            <Button type="primary" onClick={submitHandler}>
+              Submit
+            </Button>
           </Form.Item>
         </Form>
       </div>

@@ -6,14 +6,17 @@ import { Typography } from "antd";
 const { Title } = Typography;
 const Expense = () => {
   const { expense } = useContext(ExpenseContext);
-  const [transactions, setTransactions] = useState(
+  /* storing context value into new state will cause loosing reactivity of the value , don't follow below method */
+  /*   const [transactions, setTransactions] = useState(
     expense.map((item) => ({ ...item, status: "expense" }))
-  );
+  ); */
   return (
     <div>
       <AddExpense />
       <Title level={4}>Recent Expenses</Title>
-      <CustomTable data={transactions} />
+      <CustomTable
+        data={expense.map((item) => ({ ...item, status: "expense" }))}
+      />
     </div>
   );
 };

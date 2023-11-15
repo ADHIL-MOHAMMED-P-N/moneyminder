@@ -48,8 +48,11 @@ export function ExpenseProvider({ children }) {
       description: "Lunch",
     },
   ]);
+  const addToExpense = (newExp) => {
+    setExpense((prev) => [...prev, newExp]);
+  };
   return (
-    <ExpenseContext.Provider value={{ expense }}>
+    <ExpenseContext.Provider value={{ expense, addToExpense }}>
       {children}
     </ExpenseContext.Provider>
   );
