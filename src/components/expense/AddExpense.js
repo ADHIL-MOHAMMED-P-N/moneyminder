@@ -11,8 +11,8 @@ const AddExpense = () => {
   const [date, setDate] = useState(null);
 
   //datepicker
-  const datePickerHandler = (_, dateString) => {
-    setDate(dateString);
+  const datePickerHandler = (date, dateString) => {
+    setDate(date);
   };
 
   //submisssion
@@ -22,16 +22,18 @@ const AddExpense = () => {
     let month = today.getMonth() + 1;
     let year = today.getFullYear(); */
     const newExpense = {
-      date /* `${year}-${month}-${day}` */,
+      /*   date: `${year}-${month}-${day}`, */
+      date: `${date.year()}-${date.month() + 1}-${date.day()}`,
       name,
       amount: +amount, //parsing to number
       description: note,
     };
-
+    console.log(newExpense);
     addToExpense(newExpense);
     setName("");
     setAmount(0);
     setNote("");
+    setDate(null);
   };
   return (
     <>
