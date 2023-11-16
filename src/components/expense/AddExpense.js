@@ -1,21 +1,28 @@
 import { useState, useContext } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, DatePicker } from "antd";
 import ExpenseContext from "../../context/ExpenseContext";
 
 const AddExpense = () => {
-  const { addToExpense, expense } = useContext(ExpenseContext);
+  const { addToExpense } = useContext(ExpenseContext);
 
   const [name, setName] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(null);
   const [note, setNote] = useState("");
+  const [date, setDate] = useState(null);
 
+  //datepicker
+  const datePickerHandler = (_, dateString) => {
+    setDate(dateString);
+  };
+
+  //submisssion
   const submitHandler = () => {
-    const today = new Date();
+    /*   const today = new Date();
     let day = today.getDate();
     let month = today.getMonth() + 1;
-    let year = today.getFullYear();
+    let year = today.getFullYear(); */
     const newExpense = {
-      date: `${year}-${month}-${day}`,
+      date /* `${year}-${month}-${day}` */,
       name,
       amount: +amount, //parsing to number
       description: note,
@@ -56,6 +63,9 @@ const AddExpense = () => {
                 setAmount(e.target.value);
               }}
             />
+          </Form.Item>
+          <Form.Item label="DatePicker">
+            <DatePicker value={date} onChange={datePickerHandler} />
           </Form.Item>
           <Form.Item label="Note">
             <Input
