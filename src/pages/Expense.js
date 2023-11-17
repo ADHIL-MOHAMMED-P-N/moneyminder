@@ -12,6 +12,7 @@ const Expense = () => {
   ); */
   return (
     <div>
+      <Title level={4}>Add Expense</Title>
       <AddExpense />
       <Title level={4}>Recent Expenses</Title>
       <CustomTable

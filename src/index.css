@@ -26,3 +26,9 @@ code {
 .ant-table-row {
   cursor: pointer;
 }
+.ant-form-item-label {
+  padding: 0 !important;
+}
+.ant-form-item {
+  margin-bottom: 10px;
+}
