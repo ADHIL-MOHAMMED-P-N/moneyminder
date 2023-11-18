@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { Button, Form, Input, DatePicker, Space, Card } from "antd";
-import ExpenseContext from "../../context/ExpenseContext";
+import IncomeContext from "../../context/IncomeContext";
 
-const AddExpense = () => {
-  const { addToExpense } = useContext(ExpenseContext);
+const AddIncome = () => {
+  const { addToIncome } = useContext(IncomeContext);
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(null);
@@ -17,21 +17,14 @@ const AddExpense = () => {
 
   //submisssion
   const submitHandler = () => {
-    /*   const today = new Date();
-    let day = today.getDate();
-    let month = today.getMonth() + 1;
-    let year = today.getFullYear(); */
-    const newExpense = {
-      /*   date: `${year}-${month}-${day}`, */
-      date: `${date.year()}-${
-        date.month() + 1
-      }-${date.day()}` /* dayjs with antd */,
+    const newIncome = {
+      date: `${date.year()}-${date.month() + 1}-${date.day()}`,
       name,
-      amount: +amount, //parsing to number
+      amount: +amount,
       description: note,
     };
-    console.log(newExpense);
-    addToExpense(newExpense);
+
+    addToIncome(newIncome);
     setName("");
     setAmount(0);
     setNote("");
@@ -47,7 +40,7 @@ const AddExpense = () => {
         >
           <Form layout="vertical" size="large">
             <Form.Item
-              label="Expense Name"
+              label="Income Name"
               rules={[
                 {
                   required: true,
@@ -56,7 +49,7 @@ const AddExpense = () => {
             >
               <Input
                 type="text"
-                placeholder="Eg: Food"
+                placeholder="Eg: Salary"
                 value={name}
                 onChange={(e) => {
                   setName(e.target.value);
@@ -67,7 +60,7 @@ const AddExpense = () => {
               <Form.Item label="Amount">
                 <Input
                   type="number"
-                  placeholder="Eg: 50"
+                  placeholder="Eg: 10,000"
                   value={amount}
                   onChange={(e) => {
                     setAmount(e.target.value);
@@ -81,7 +74,7 @@ const AddExpense = () => {
             <Form.Item label="Note">
               <Input
                 type="text"
-                placeholder="Write note about this expense"
+                placeholder="Write note about this income"
                 value={note}
                 onChange={(e) => {
                   setNote(e.target.value);
@@ -106,4 +99,4 @@ const AddExpense = () => {
   );
 };
 
-export default AddExpense;
+export default AddIncome;

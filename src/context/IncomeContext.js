@@ -47,8 +47,11 @@ export function IncomeProvider({ children }) {
       description: "App development",
     },
   ]);
+  const addToIncome = (newIncome) => {
+    setIncome((prev) => [...prev, newIncome]);
+  };
   return (
-    <IncomeContext.Provider value={{ income }}>
+    <IncomeContext.Provider value={{ income, addToIncome }}>
       {children}
     </IncomeContext.Provider>
   );
