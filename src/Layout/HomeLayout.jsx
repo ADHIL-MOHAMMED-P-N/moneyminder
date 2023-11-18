@@ -19,6 +19,8 @@ const HomeLayout = () => {
     color: "#fff",
   };
   const footerStyle = {
+    /*    position: "sticky",
+    bottom: 0, */
     backgroundColor: "#001529",
     color: "#fff",
   };
