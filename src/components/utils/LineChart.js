@@ -9,6 +9,7 @@ const LineChart = ({ transaction }) => {
   const month = today.getMonth() + 1;
   // finding monthlyexpense from all
   const monthTransaction = transaction.filter((trans) => {
+    /* change code to collect this current year transaction only */
     const transDate = new Date(trans.date);
     const transMonth = transDate.getMonth() + 1;
     return transMonth === month;
@@ -47,13 +48,11 @@ const LineChart = ({ transaction }) => {
     { day: 30, amount: 0 },
     { day: 31, amount: 0 },
   ];
-
+  /* change to foreach */
   for (let i = 0; i < monthTransaction.length; i++) {
-    const date = new Date(monthTransaction[i].date).getDate();
-    console.log(date);
+    const day = new Date(monthTransaction[i].date).getDate();
+    dailyTransaction[day - 1].amount += monthTransaction[i].amount;
   }
-
-  console.log(monthTransaction);
 
   const chartData = {
     labels: dailyTransaction.map((item) => item.day),
