@@ -25,7 +25,7 @@ const AddExpense = () => {
       /*   date: `${year}-${month}-${day}`, */
       date: `${date.year()}-${
         date.month() + 1
-      }-${date.day()}` /* dayjs with antd */,
+      }-${date.date()}` /* dayjs with antd */,
       name,
       amount: +amount, //parsing to number
       description: note,

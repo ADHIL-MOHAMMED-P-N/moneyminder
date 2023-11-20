@@ -18,7 +18,7 @@ const AddIncome = () => {
   //submisssion
   const submitHandler = () => {
     const newIncome = {
-      date: `${date.year()}-${date.month() + 1}-${date.day()}`,
+      date: `${date.year()}-${date.month() + 1}-${date.date()}`,
       name,
       amount: +amount,
       description: note,
