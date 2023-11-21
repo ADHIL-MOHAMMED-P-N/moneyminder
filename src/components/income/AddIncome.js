@@ -32,7 +32,7 @@ const AddIncome = () => {
   };
   return (
     <>
-      <div style={{ maxWidth: 450 }}>
+      <div>
         <Card
           size="small"
           loading={false}

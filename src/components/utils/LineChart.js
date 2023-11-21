@@ -1,7 +1,7 @@
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Card } from "antd";
-const LineChart = ({ transaction }) => {
+const LineChart = ({ transaction, type }) => {
   //change monthly transaction logic to context (avoid redundancy)
   //finding current month
 
@@ -58,7 +58,7 @@ const LineChart = ({ transaction }) => {
     labels: dailyTransaction.map((item) => item.day),
     datasets: [
       {
-        label: "Expense",
+        label: type === "expense" ? "Expense" : "Income",
         data: dailyTransaction.map((item) => item.amount),
         backgroundColor: "#b5cef2",
         borderRadius: 2,
@@ -66,7 +66,7 @@ const LineChart = ({ transaction }) => {
     ],
   };
   return (
-    <Card style={{ width: 500 }}>
+    <Card>
       <Line data={chartData} />
     </Card>
   );
