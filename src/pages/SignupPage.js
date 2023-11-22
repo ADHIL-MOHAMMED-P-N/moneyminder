@@ -25,7 +25,7 @@ const SignupPage = () => {
           Sign Up
         </Title>
         <p>
-          Already have an account ? <Link to={"/login"}>Login</Link>
+          Already have an account ? <Link to={"/login"}>Log in</Link>
         </p>
         <Form layout="vertical" size="large" autoComplete="off">
           <Form.Item
