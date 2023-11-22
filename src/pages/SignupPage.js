@@ -1,7 +1,9 @@
 import { Button, Form, Input, Card, Typography } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const { Title } = Typography;
+
 const SignupPage = () => {
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -61,7 +63,12 @@ const SignupPage = () => {
               span: 16,
             }}
           >
-            <Button type="primary" htmlType="submit" style={{ marginTop: 10 }}>
+            <Button
+              onClick={() => navigate("/dashboard")}
+              type="primary"
+              htmlType="submit"
+              style={{ marginTop: 10 }}
+            >
               Sign Up
             </Button>
           </Form.Item>
