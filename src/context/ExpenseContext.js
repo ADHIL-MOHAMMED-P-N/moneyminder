@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { createContext, useEffect, useState } from "react";
+import { db } from "../firebase";
 
 const ExpenseContext = createContext();
 
@@ -48,6 +50,25 @@ export function ExpenseProvider({ children }) {
       description: "Lunch",
     },
   ]);
+
+  //get expense - firebase
+  const getExpense = () => {
+    const q = query(collection(db, "expense"));
+    const unsub = onSnapshot(q, (snap) => {
+      let expenseArr = [];
+      snap.forEach((doc) => {
+        expenseArr.push(doc.data());
+      });
+      setExpense(expenseArr);
+    });
+    console.log(expense);
+    return () => unsub();
+  };
+
+  useEffect(() => {
+    getExpense();
+  }, []);
+
   const addToExpense = (newExp) => {
     setExpense((prev) => [...prev, newExp]);
   };
