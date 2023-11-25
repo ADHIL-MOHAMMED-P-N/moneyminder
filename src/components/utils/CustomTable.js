@@ -1,6 +1,7 @@
 /* implement pagination and filter */
 import { useNavigate } from "react-router-dom";
-import { Space, Table, Dropdown, Button, Badge } from "antd";
+import { Space, Table, Dropdown, Button, Badge, Modal } from "antd";
+import { useState } from "react";
 import {
   CalendarOutlined,
   DeleteOutlined,
@@ -21,7 +22,18 @@ const TableHeader = ({ title, icon }) => {
     </Space>
   );
 };
-const ActionDropdown = () => {
+const ActionDropdown = ({ record }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const items = [
     {
       key: "1",
@@ -30,18 +42,30 @@ const ActionDropdown = () => {
     },
     {
       key: "2",
-      label: <p style={{ margin: 0 }}>Delete</p>,
+      label: <Button onClick={showModal}>Delete</Button>,
       icon: <DeleteOutlined />,
     },
   ];
   return (
-    <Dropdown
-      menu={{
-        items,
-      }}
-    >
-      <Button icon={<SmallDashOutlined />} />
-    </Dropdown>
+    <>
+      <Dropdown
+        menu={{
+          items,
+        }}
+        trigger={["click"]}
+      >
+        <Button icon={<SmallDashOutlined />} />
+      </Dropdown>
+      {/* modal only render based on isModalOpens state*/}
+      <Modal
+        title="Delete Transaction"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        Do you want to delete this transaction <b>{record.name}</b> ?
+      </Modal>
+    </>
   );
 };
 
@@ -115,22 +139,22 @@ const CustomTable = ({ data }) => {
     {
       title: <TableHeader title="Action" />,
       key: "action",
-      render: () => <ActionDropdown />,
+      render: (_, record) => <ActionDropdown record={record} />,
     },
   ];
 
   return (
     <>
       <Table
-        onRow={(record) => {
+        /*         onRow={(record) => {
           return {
             onClick: (event) => {
               navigate(
                 `/${record.status}/${record.name}`
-              ); /* later change record.name to record id */
+              ); //later change record.name to record id 
             },
           };
-        }}
+        }} */
         columns={columns}
         dataSource={data}
       />
