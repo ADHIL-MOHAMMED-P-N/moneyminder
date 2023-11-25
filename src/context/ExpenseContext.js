@@ -6,7 +6,7 @@ const ExpenseContext = createContext();
 
 export function ExpenseProvider({ children }) {
   const [expense, setExpense] = useState([
-    {
+    /*  {
       date: "2023-10-14",
       name: "Grocery Shopping",
       amount: 50.0,
@@ -48,10 +48,11 @@ export function ExpenseProvider({ children }) {
       name: "Lunch",
       amount: 50.0,
       description: "Lunch",
-    },
+    }, */
   ]);
 
-  //get expense - firebase
+  //get all expense - realtime collection -firebase
+  //onsnapshot does not return promise (no need of async await)
   const getExpense = () => {
     const q = query(collection(db, "expense"));
     const unsub = onSnapshot(q, (snap) => {
@@ -61,13 +62,14 @@ export function ExpenseProvider({ children }) {
       });
       setExpense(expenseArr);
     });
-    console.log(expense);
+
     return () => unsub();
   };
 
   useEffect(() => {
     getExpense();
   }, []);
+  console.log(expense);
 
   const addToExpense = (newExp) => {
     setExpense((prev) => [...prev, newExp]);
