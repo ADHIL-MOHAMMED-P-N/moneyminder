@@ -16,7 +16,7 @@ const AddExpense = () => {
   };
 
   //submisssion
-  const submitHandler = () => {
+  const submitHandler = (e) => {
     /*   const today = new Date();
     let day = today.getDate();
     let month = today.getMonth() + 1;
@@ -91,7 +91,9 @@ const AddExpense = () => {
             <Form.Item style={{ marginTop: 25 }}>
               <Button
                 type="primary"
-                onClick={submitHandler}
+                onClick={
+                  submitHandler
+                } /* best practice is no give a onsubmit in form tag */
                 disabled={
                   name === "" || note === "" || amount == 0 || amount === null
                 }

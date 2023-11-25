@@ -1,4 +1,4 @@
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { db } from "../firebase";
 
@@ -53,8 +53,9 @@ export function ExpenseProvider({ children }) {
 
   //get all expense - realtime collection -firebase
   //onsnapshot does not return promise (no need of async await)
-  const getExpense = () => {
-    const q = query(collection(db, "expense"));
+  const expenseColl = collection(db, "expense");
+  const getAllExpense = () => {
+    const q = query(expenseColl);
     const unsub = onSnapshot(q, (snap) => {
       let expenseArr = [];
       snap.forEach((doc) => {
@@ -67,12 +68,12 @@ export function ExpenseProvider({ children }) {
   };
 
   useEffect(() => {
-    getExpense();
+    getAllExpense();
   }, []);
-  console.log(expense);
 
-  const addToExpense = (newExp) => {
-    setExpense((prev) => [...prev, newExp]);
+  const addToExpense = async (newExp) => {
+    await addDoc(expenseColl, newExp);
+    /*  setExpense((prev) => [...prev, newExp]); */ // since onsnapshot(getExpense) is looking for change in collection, no need to setExpense again because it will run twice and will add duplicate expense
   };
   return (
     <ExpenseContext.Provider value={{ expense, addToExpense }}>
