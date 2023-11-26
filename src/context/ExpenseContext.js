@@ -5,6 +5,7 @@ import {
   onSnapshot,
   query,
   doc,
+  updateDoc,
 } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { db } from "../firebase";
@@ -89,8 +90,16 @@ export function ExpenseProvider({ children }) {
     await deleteDoc(doc(db, "expense", id));
   };
 
+  //edit expense
+
+  const editExpense = async (id, newExp) => {
+    await updateDoc(doc(db, "expense", id), newExp);
+  };
+
   return (
-    <ExpenseContext.Provider value={{ expense, addToExpense, deleteExpense }}>
+    <ExpenseContext.Provider
+      value={{ expense, addToExpense, deleteExpense, editExpense }}
+    >
       {children}
     </ExpenseContext.Provider>
   );

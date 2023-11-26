@@ -1,5 +1,6 @@
 import { Button, DatePicker, Form, Input, Modal, Space } from "antd";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import ExpenseContext from "../../context/ExpenseContext";
 
 const EditModal = ({
   isEditModalOpen,
@@ -10,13 +11,25 @@ const EditModal = ({
   const [amount, setAmount] = useState(selectedTransaction.amount);
   const [note, setNote] = useState(selectedTransaction.description);
   const [date, setDate] = useState(null); //later change to seletedtransactiondate(since selectedtransaction.date is string is throwing err )
-
-  const handleOk = () => {
-    setIsEditModalOpen(false);
-  };
+  const { editExpense } = useContext(ExpenseContext);
 
   const datePickerHandler = (date) => {
     setDate(date);
+  };
+
+  const handleOk = () => {
+    const newExpense = {
+      /*   date: `${year}-${month}-${day}`, */
+      date: `${date.year()}-${
+        date.month() + 1
+      }-${date.date()}` /* dayjs with antd */,
+      name,
+      amount: +amount, //parsing to number
+      description: note,
+    };
+    console.log(newExpense);
+    editExpense(selectedTransaction.id, newExpense);
+    setIsEditModalOpen(false);
   };
 
   return (
