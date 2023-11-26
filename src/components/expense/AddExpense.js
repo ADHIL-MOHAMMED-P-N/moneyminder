@@ -30,7 +30,7 @@ const AddExpense = () => {
       amount: +amount, //parsing to number
       description: note,
     };
-    console.log(newExpense);
+
     addToExpense(newExpense);
     setName("");
     setAmount(0);

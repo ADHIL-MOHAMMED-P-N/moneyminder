@@ -38,22 +38,10 @@ const ActionDropdown = ({ record }) => {
     setIsDeleteModalOpen(false);
   };
 
-  const showEditModal = () => {
-    setIsEditModalOpen(true);
-  };
-  const handleOkEditModal = (id) => {
-    console.log(id);
-    deleteExpense(id);
-    setIsEditModalOpen(false);
-  };
-  const handleCancelEditModal = () => {
-    setIsEditModalOpen(false);
-  };
-
   const items = [
     {
       key: "1",
-      label: <Button onClick={showEditModal}>Edit</Button>,
+      label: <Button onClick={() => setIsEditModalOpen(true)}>Edit</Button>,
       icon: <EditOutlined />,
     },
     {
@@ -81,10 +69,12 @@ const ActionDropdown = ({ record }) => {
       >
         Do you want to delete this transaction <b>{record.name}</b> ?
       </Modal>
+
+      {/* modal based on isEditModalOpen state */}
       <EditModal
+        selectedTransaction={record}
         isEditModalOpen={isEditModalOpen}
-        handleOkEditModal={handleOkEditModal}
-        handleCancelEditModal={handleCancelEditModal}
+        setIsEditModalOpen={setIsEditModalOpen}
       />
     </>
   );
