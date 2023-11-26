@@ -1,7 +1,8 @@
 /* implement pagination and filter */
 import { useNavigate } from "react-router-dom";
 import { Space, Table, Dropdown, Button, Badge, Modal } from "antd";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import ExpenseContext from "../../context/ExpenseContext";
 import {
   CalendarOutlined,
   DeleteOutlined,
@@ -12,6 +13,7 @@ import {
   SnippetsOutlined,
   TransactionOutlined,
 } from "@ant-design/icons";
+
 const textStyle = { fontSize: 14, fontWeight: 500, margin: 0 };
 /* const linkStyle = { color: "black" }; */
 const TableHeader = ({ title, icon }) => {
@@ -24,10 +26,14 @@ const TableHeader = ({ title, icon }) => {
 };
 const ActionDropdown = ({ record }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { deleteExpense } = useContext(ExpenseContext);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
+  const handleOk = (id) => {
+    console.log(id);
+    deleteExpense(id);
     setIsModalOpen(false);
   };
 
@@ -60,7 +66,7 @@ const ActionDropdown = ({ record }) => {
       <Modal
         title="Delete Transaction"
         open={isModalOpen}
-        onOk={handleOk}
+        onOk={() => handleOk(record.id)}
         onCancel={handleCancel}
       >
         Do you want to delete this transaction <b>{record.name}</b> ?

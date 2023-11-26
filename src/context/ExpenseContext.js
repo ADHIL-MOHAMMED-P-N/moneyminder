@@ -1,4 +1,11 @@
-import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  onSnapshot,
+  query,
+  doc,
+} from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 import { db } from "../firebase";
 
@@ -59,7 +66,7 @@ export function ExpenseProvider({ children }) {
     const unsub = onSnapshot(q, (snap) => {
       let expenseArr = [];
       snap.forEach((doc) => {
-        expenseArr.push(doc.data());
+        expenseArr.push({ id: doc.id, ...doc.data() });
       });
       setExpense(expenseArr);
     });
@@ -70,13 +77,19 @@ export function ExpenseProvider({ children }) {
   useEffect(() => {
     getAllExpense();
   }, []);
-
+  //add expense
   const addToExpense = async (newExp) => {
     await addDoc(expenseColl, newExp);
     /*  setExpense((prev) => [...prev, newExp]); */ // since onsnapshot(getExpense) is looking for change in collection, no need to setExpense again because it will run twice and will add duplicate expense
   };
+
+  //delete expense
+  const deleteExpense = async (id) => {
+    await deleteDoc(doc(db, "expense", id));
+  };
+
   return (
-    <ExpenseContext.Provider value={{ expense, addToExpense }}>
+    <ExpenseContext.Provider value={{ expense, addToExpense, deleteExpense }}>
       {children}
     </ExpenseContext.Provider>
   );
