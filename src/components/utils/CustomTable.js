@@ -13,6 +13,7 @@ import {
   SnippetsOutlined,
   TransactionOutlined,
 } from "@ant-design/icons";
+import EditModal from "./EditModal";
 
 const textStyle = { fontSize: 14, fontWeight: 500, margin: 0 };
 /* const linkStyle = { color: "black" }; */
@@ -24,31 +25,40 @@ const TableHeader = ({ title, icon }) => {
     </Space>
   );
 };
+
 const ActionDropdown = ({ record }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const { deleteExpense } = useContext(ExpenseContext);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = (id) => {
+  const handleOkDeleteModal = (id) => {
     console.log(id);
     deleteExpense(id);
-    setIsModalOpen(false);
+    setIsDeleteModalOpen(false);
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const showEditModal = () => {
+    setIsEditModalOpen(true);
   };
+  const handleOkEditModal = (id) => {
+    console.log(id);
+    deleteExpense(id);
+    setIsEditModalOpen(false);
+  };
+  const handleCancelEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
   const items = [
     {
       key: "1",
-      label: <p style={{ margin: 0 }}>Edit</p>,
+      label: <Button onClick={showEditModal}>Edit</Button>,
       icon: <EditOutlined />,
     },
     {
       key: "2",
-      label: <Button onClick={showModal}>Delete</Button>,
+      label: <Button onClick={() => setIsDeleteModalOpen(true)}>Delete</Button>,
       icon: <DeleteOutlined />,
     },
   ];
@@ -62,15 +72,20 @@ const ActionDropdown = ({ record }) => {
       >
         <Button icon={<SmallDashOutlined />} />
       </Dropdown>
-      {/* modal only render based on isModalOpens state*/}
+      {/* modal only render based on isDeleteModalOpen state*/}
       <Modal
         title="Delete Transaction"
-        open={isModalOpen}
-        onOk={() => handleOk(record.id)}
-        onCancel={handleCancel}
+        open={isDeleteModalOpen}
+        onOk={() => handleOkDeleteModal(record.id)}
+        onCancel={() => setIsDeleteModalOpen(false)}
       >
         Do you want to delete this transaction <b>{record.name}</b> ?
       </Modal>
+      <EditModal
+        isEditModalOpen={isEditModalOpen}
+        handleOkEditModal={handleOkEditModal}
+        handleCancelEditModal={handleCancelEditModal}
+      />
     </>
   );
 };

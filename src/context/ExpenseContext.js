@@ -77,6 +77,7 @@ export function ExpenseProvider({ children }) {
   useEffect(() => {
     getAllExpense();
   }, []);
+
   //add expense
   const addToExpense = async (newExp) => {
     await addDoc(expenseColl, newExp);
