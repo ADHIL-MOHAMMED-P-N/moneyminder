@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Modal, Space } from "antd";
+import { DatePicker, Form, Input, Modal, Space } from "antd";
 import { useState, useContext } from "react";
 import ExpenseContext from "../../context/ExpenseContext";
 
@@ -16,7 +16,7 @@ const EditModal = ({
   const datePickerHandler = (date) => {
     setDate(date);
   };
-
+  //write condition for the income also based on the record.status values
   const handleOk = () => {
     const newExpense = {
       /*   date: `${year}-${month}-${day}`, */

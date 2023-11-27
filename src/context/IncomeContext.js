@@ -1,10 +1,19 @@
-import { createContext, useState } from "react";
-
+import { createContext, useState, useEffect } from "react";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  onSnapshot,
+  query,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
 const IncomeContext = createContext();
 
 export function IncomeProvider({ children }) {
   const [income, setIncome] = useState([
-    {
+    /* {
       date: "2023-06-02",
       name: "Stock Sale",
       amount: 800.0,
@@ -45,11 +54,34 @@ export function IncomeProvider({ children }) {
       name: "Freelance",
       amount: 700,
       description: "App development",
-    },
+    }, */
   ]);
-  const addToIncome = (newIncome) => {
-    setIncome((prev) => [...prev, newIncome]);
+
+  //get all income - realtime collection -firebase
+  //onsnapshot does not return promise (no need of async await)
+  const incomeColl = collection(db, "income");
+  const getAllIncome = () => {
+    const q = query(incomeColl);
+    const unsub = onSnapshot(q, (snap) => {
+      let incomeArr = [];
+      snap.forEach((doc) => {
+        incomeArr.push({ id: doc.id, ...doc.data() });
+      });
+      setIncome(incomeArr);
+    });
+
+    return () => unsub();
   };
+
+  useEffect(() => {
+    getAllIncome();
+  }, []);
+
+  //add expense
+  const addToIncome = async (newIncome) => {
+    await addDoc(incomeColl, newIncome);
+  };
+
   return (
     <IncomeContext.Provider value={{ income, addToIncome }}>
       {children}
