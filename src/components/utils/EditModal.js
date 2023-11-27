@@ -1,6 +1,7 @@
 import { DatePicker, Form, Input, Modal, Space } from "antd";
 import { useState, useContext } from "react";
 import ExpenseContext from "../../context/ExpenseContext";
+import IncomeContext from "../../context/IncomeContext";
 
 const EditModal = ({
   isEditModalOpen,
@@ -12,13 +13,14 @@ const EditModal = ({
   const [note, setNote] = useState(selectedTransaction.description);
   const [date, setDate] = useState(null); //later change to seletedtransactiondate(since selectedtransaction.date is string is throwing err )
   const { editExpense } = useContext(ExpenseContext);
+  const { editIncome } = useContext(IncomeContext);
 
   const datePickerHandler = (date) => {
     setDate(date);
   };
   //write condition for the income also based on the record.status values
   const handleOk = () => {
-    const newExpense = {
+    const editedTransaction = {
       /*   date: `${year}-${month}-${day}`, */
       date: `${date.year()}-${
         date.month() + 1
@@ -27,9 +29,15 @@ const EditModal = ({
       amount: +amount, //parsing to number
       description: note,
     };
-    console.log(newExpense);
-    editExpense(selectedTransaction.id, newExpense);
+    if (selectedTransaction.status === "expense") {
+      editExpense(selectedTransaction.id, editedTransaction);
+    }
+    if (selectedTransaction.status === "income") {
+      editIncome(selectedTransaction.id, editedTransaction);
+    }
+
     setIsEditModalOpen(false);
+    //bug: after deleting one item , edit next item, states of deleted item comes in forms
   };
 
   return (
