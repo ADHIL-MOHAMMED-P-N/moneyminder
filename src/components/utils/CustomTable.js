@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Space, Table, Dropdown, Button, Badge, Modal } from "antd";
 import { useState, useContext } from "react";
 import ExpenseContext from "../../context/ExpenseContext";
+import IncomeContext from "../../context/IncomeContext";
 import {
   CalendarOutlined,
   DeleteOutlined,
@@ -31,10 +32,16 @@ const ActionDropdown = ({ record }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const { deleteExpense } = useContext(ExpenseContext);
+  const { deleteIncome } = useContext(IncomeContext);
 
-  const handleOkDeleteModal = (id) => {
-    console.log(id);
-    deleteExpense(id);
+  const handleOkDeleteModal = (record) => {
+    //since there is one table for both income nd expense, based on staus changing crud operation
+    if (record.status === "expense") {
+      deleteExpense(record.id);
+    }
+    if (record.status === "income") {
+      deleteIncome(record.id);
+    }
     setIsDeleteModalOpen(false);
   };
 
@@ -64,7 +71,7 @@ const ActionDropdown = ({ record }) => {
       <Modal
         title="Delete Transaction"
         open={isDeleteModalOpen}
-        onOk={() => handleOkDeleteModal(record.id)}
+        onOk={() => handleOkDeleteModal(record)}
         onCancel={() => setIsDeleteModalOpen(false)}
       >
         Do you want to delete this transaction <b>{record.name}</b> ?

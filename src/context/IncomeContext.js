@@ -77,13 +77,25 @@ export function IncomeProvider({ children }) {
     getAllIncome();
   }, []);
 
-  //add expense
+  //add income
   const addToIncome = async (newIncome) => {
     await addDoc(incomeColl, newIncome);
   };
+  //delete income
+  const deleteIncome = async (id) => {
+    await deleteDoc(doc(db, "income", id));
+  };
+
+  //edit expense
+
+  const editIncome = async (id, newIncome) => {
+    await updateDoc(doc(db, "income", id), newIncome);
+  };
 
   return (
-    <IncomeContext.Provider value={{ income, addToIncome }}>
+    <IncomeContext.Provider
+      value={{ income, addToIncome, deleteIncome, editIncome }}
+    >
       {children}
     </IncomeContext.Provider>
   );
