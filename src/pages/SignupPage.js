@@ -1,9 +1,25 @@
 import { Button, Form, Input, Card, Typography } from "antd";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContext";
 const { Title } = Typography;
 
 const SignupPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { signUp } = useUserAuth();
   const navigate = useNavigate();
+  //handle submit signup
+  const submitHandler = async (e) => {
+    /* change to onsubbmit instead of onclick */
+    e.preventDefault();
+    try {
+      await signUp(email, password);
+    } catch (error) {
+      console.log(error);
+      //create a error component and dosplay error.message
+    }
+  };
   return (
     <div
       style={{
@@ -29,7 +45,12 @@ const SignupPage = () => {
         <p>
           Already have an account ? <Link to={"/login"}>Log in</Link>
         </p>
-        <Form layout="vertical" size="large" autoComplete="off">
+        <Form
+          layout="vertical"
+          size="large"
+          autoComplete="off"
+          onFinish={submitHandler}
+        >
           <Form.Item
             label="Email"
             name="email"
@@ -41,7 +62,7 @@ const SignupPage = () => {
               },
             ]}
           >
-            <Input />
+            <Input value={email} onChange={(e) => setEmail(e.target.value)} />
           </Form.Item>
 
           <Form.Item
@@ -54,7 +75,10 @@ const SignupPage = () => {
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </Form.Item>
 
           <Form.Item
@@ -64,7 +88,10 @@ const SignupPage = () => {
             }}
           >
             <Button
-              onClick={() => navigate("/dashboard")}
+              onClick={(e) => {
+                submitHandler(e);
+                navigate("/dashboard");
+              }}
               type="primary"
               htmlType="submit"
               style={{ marginTop: 10 }}
