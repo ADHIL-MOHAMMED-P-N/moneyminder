@@ -20,6 +20,10 @@ export const UserAuthProvider = ({ children }) => {
   const logIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
+  //logout
+  const logOut = () => {
+    return signOut(auth);
+  };
   //checking auth changes and setting the user
   useEffect(() => {
     //only listen to this on mounting a component
@@ -33,7 +37,7 @@ export const UserAuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserAuthContext.Provider value={{ signUp, logIn, user }}>
+    <UserAuthContext.Provider value={{ signUp, logIn, user, logOut }}>
       {children}
     </UserAuthContext.Provider>
   );
