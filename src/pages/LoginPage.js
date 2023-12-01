@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   // success message
   const key = "success";
-  const success = () => {
+  const successMessage = () => {
     messageApi.open({
       key,
       type: "loading",
@@ -32,10 +32,10 @@ const LoginPage = () => {
         key,
         type: "success",
         content: "Log in success",
-        duration: 1,
+        duration: 0.5,
         onClose: () => navigate("/dashboard"),
       });
-    }, 1000);
+    }, 2000);
   };
 
   //handle submit login
@@ -45,7 +45,7 @@ const LoginPage = () => {
     try {
       await logIn(email, password);
       /*   navigate("/dashboard"); */
-      success();
+      successMessage();
     } catch (error) {
       console.log(error.message);
       /*  setError(error.message); */ //check why setting error state is not working(problem:on intial error its coming as empty string)

@@ -16,6 +16,7 @@ import Account from "./pages/Account.js";
 import { ExpenseProvider } from "./context/ExpenseContext";
 import { IncomeProvider } from "./context/IncomeContext";
 import { UserAuthProvider } from "./context/UserAuthContext.js";
+import ProtectedRoute from "./components/utils/ProtectedRoute.js";
 function App() {
   return (
     <UserAuthProvider>
@@ -28,7 +29,14 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/logout" element={<LogoutPage />} />
               {/* Inside routes */}
-              <Route path="/" element={<HomeLayout />}>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <HomeLayout />
+                  </ProtectedRoute>
+                }
+              >
                 <Route index element={<Navigate to="/dashboard" />} />
                 {/* to navigate from / for /dashboard */}
                 <Route path="dashboard" element={<Dashboard />} />
