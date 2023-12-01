@@ -1,11 +1,13 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Space, Typography } from "antd";
 import Search from "antd/es/input/Search";
+import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
 const MainHeader = () => {
   const onSearch = () => console.log("Search");
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -35,6 +37,9 @@ const MainHeader = () => {
             <Avatar
               style={{ backgroundColor: "#fde3cf", color: "#f56a00" }}
               shape="square"
+              onClick={() => {
+                navigate("/signup");
+              }} /* for testing */
               icon={<UserOutlined />}
             />
           </div>
