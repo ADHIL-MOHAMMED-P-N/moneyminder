@@ -34,7 +34,7 @@ const MainHeader = () => {
               style={{ marginRight: 15 }}
             />
             <p style={{ fontSize: 16, fontWeight: "500", marginRight: 15 }}>
-              {user.email}
+              {user ? user.email : "User"}
             </p>
             <Avatar
               style={{ backgroundColor: "#fde3cf", color: "#f56a00" }}
