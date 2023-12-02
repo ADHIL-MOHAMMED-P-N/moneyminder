@@ -10,8 +10,14 @@ import {
 const UserAuthContext = createContext();
 
 export const UserAuthProvider = ({ children }) => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(
+    localStorage.getItem("user") === null
+      ? null
+      : JSON.parse(localStorage.getItem("user"))
+  ); //change this to coockie later, localstorage is not secure
   //signup with email and password
+
+  //signup
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
@@ -24,12 +30,15 @@ export const UserAuthProvider = ({ children }) => {
   const logOut = () => {
     return signOut(auth);
   };
+
   //checking auth changes and setting the user
   useEffect(() => {
     //only listen to this on mounting a component
     //no need to listen to this function whenever a component is unmounted , so need to cleanup.
     const unsubscribte = onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser);
       setUser(currentUser);
+      localStorage.setItem("user", JSON.stringify(currentUser)); // otherwise on refresh will loose the user(so set the user from localstoreage and initilalize on render in usestate above)
     });
     return () => {
       unsubscribte(); //cleanup
