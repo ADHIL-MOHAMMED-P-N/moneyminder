@@ -1,4 +1,5 @@
 import { Button, Form, Input, Card, Typography, message } from "antd";
+import { GoogleOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
@@ -8,7 +9,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { logIn } = useUserAuth();
+  const { logIn, googleLogin } = useUserAuth();
   const [messageApi, contextHolder] = message.useMessage();
 
   //error message
@@ -44,11 +45,24 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       await logIn(email, password);
-      /*   navigate("/dashboard"); */
+      /*   navigate("/dashboard"); */ //in successmessage
       successMessage();
     } catch (error) {
       console.log(error.message);
       /*  setError(error.message); */ //check why setting error state is not working(problem:on intial error its coming as empty string)
+      errorMessage(error.message);
+    }
+  };
+
+  //login with google
+
+  const googleHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await googleLogin();
+      successMessage();
+    } catch (error) {
+      console.log(error.message);
       errorMessage(error.message);
     }
   };
@@ -129,6 +143,15 @@ const LoginPage = () => {
               </Button>
             </Form.Item>
           </Form>
+          <Button
+            type="primary"
+            block
+            icon={<GoogleOutlined />}
+            size="large"
+            onClick={googleHandler}
+          >
+            Login With Google
+          </Button>
         </Card>
       </div>
     </>
