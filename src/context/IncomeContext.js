@@ -7,11 +7,14 @@ import {
   query,
   doc,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { useUserAuth } from "./UserAuthContext";
 const IncomeContext = createContext();
 
 export function IncomeProvider({ children }) {
+  const { user } = useUserAuth();
   const [income, setIncome] = useState([]); //for testing use dummy data in data folder
   /*  {
     userId,
@@ -25,7 +28,7 @@ export function IncomeProvider({ children }) {
   //onsnapshot does not return promise (no need of async await)
   const incomeColl = collection(db, "income");
   const getAllIncome = () => {
-    const q = query(incomeColl);
+    const q = query(incomeColl, where("userId", "==", user ? user.uid : "")); // query to take only logged in users data; to get all user's data remove where parameter ie (const q = query(expenseColl))
     const unsub = onSnapshot(q, (snap) => {
       let incomeArr = [];
       snap.forEach((doc) => {
@@ -39,7 +42,8 @@ export function IncomeProvider({ children }) {
 
   useEffect(() => {
     getAllIncome();
-  }, []);
+  }, [user]); //whene ever user changes run snap again(to filter data w.r.t user)
+  //because onsnap only run in 2 condition 1. when data changes 2. initial render , so inorder to run whene ever user changes(login logout) we need to add it as dependancy
 
   //add income
   const addToIncome = async (newIncome) => {
