@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
 import { Button, Form, Input, DatePicker, Space, Card } from "antd";
 import IncomeContext from "../../context/IncomeContext";
+import { useUserAuth } from "../../context/UserAuthContext";
 
 const AddIncome = () => {
   const { addToIncome } = useContext(IncomeContext);
+  const { user } = useUserAuth();
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(null);
@@ -18,6 +20,7 @@ const AddIncome = () => {
   //submisssion
   const submitHandler = () => {
     const newIncome = {
+      userId: user.uid,
       date: `${date.year()}-${date.month() + 1}-${date.date()}`,
       name,
       amount: +amount,

@@ -47,7 +47,6 @@ export const UserAuthProvider = ({ children }) => {
     //only listen to this on mounting a component
     //no need to listen to this function whenever a component is unmounted , so need to cleanup.
     const unsubscribte = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
       localStorage.setItem("user", JSON.stringify(currentUser)); // otherwise on refresh will loose the user(so set the user from localstoreage and initilalize on render in usestate above)
     });

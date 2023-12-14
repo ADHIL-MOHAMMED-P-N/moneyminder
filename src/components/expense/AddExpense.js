@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
 import { Button, Form, Input, DatePicker, Space, Card } from "antd";
 import ExpenseContext from "../../context/ExpenseContext";
+import { useUserAuth } from "../../context/UserAuthContext";
 
 const AddExpense = () => {
   const { addToExpense } = useContext(ExpenseContext);
+  const { user } = useUserAuth();
 
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(null);
@@ -23,6 +25,7 @@ const AddExpense = () => {
     let year = today.getFullYear(); */
     const newExpense = {
       /*   date: `${year}-${month}-${day}`, */
+      userId: user.uid,
       date: `${date.year()}-${
         date.month() + 1
       }-${date.date()}` /* dayjs with antd */,
