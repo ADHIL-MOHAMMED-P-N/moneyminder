@@ -51,7 +51,6 @@ function App() {
               </Route>
               {/* error routes */}
               <Route path="/404" element={<Error404 />} />
-              <Route path="/500" element={<Error500 />} />
               <Route path="*" element={<Navigate to="/404" />} />
             </Routes>
           </BrowserRouter>

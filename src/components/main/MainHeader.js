@@ -27,22 +27,23 @@ const MainHeader = () => {
         </div>
         <div>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Search
+            {/*   <Search
               placeholder="input search text"
               onSearch={onSearch}
               enterButton
               style={{ marginRight: 15 }}
-            />
+            /> */}
             <p style={{ fontSize: 16, fontWeight: "500", marginRight: 15 }}>
               {user ? user.email : "User"}
             </p>
             <Avatar
               style={{ backgroundColor: "#fde3cf", color: "#f56a00" }}
-              shape="square"
+              shape="circle"
               onClick={() => {
-                navigate("/signup");
+                navigate("/login");
               }} /* for testing */
               icon={<UserOutlined />}
+              src={user.photoURL}
             />
           </div>
         </div>

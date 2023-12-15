@@ -62,6 +62,8 @@ const LineChart = ({ transaction, type }) => {
         data: dailyTransaction.map((item) => item.amount),
         backgroundColor: "#b5cef2",
         borderRadius: 2,
+        tension: 0.4,
+        borderWidth: 2,
       },
     ],
   };
