@@ -32,3 +32,6 @@ code {
 .ant-form-item {
   margin-bottom: 10px;
 }
+.account-detailsCard .ant-card-head {
+  background-color: #fcfcfc !important;
+}
