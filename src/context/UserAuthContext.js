@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { addDoc, collection, query, where } from "firebase/firestore";
 
 const UserAuthContext = createContext();
 
@@ -17,11 +18,18 @@ export const UserAuthProvider = ({ children }) => {
       ? null
       : JSON.parse(localStorage.getItem("user"))
   ); //change this to coockie later, localstorage is not secure
+  const [userDetails, setUserDetails] = useState({});
   //signup with email and password
 
   //signup
+  const usersCollection = collection(db, "users");
   function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      function () {
+        let userUid = auth.currentUser.uid;
+        addDoc(usersCollection, { userId: userUid, name: "", email });
+      }
+    );
   }
 
   //login with email and password
@@ -42,6 +50,13 @@ export const UserAuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  /*  const getUserDetails = async () => {
+    const q = query(
+      usersCollection,
+      where("userId", "==", user ? user.uid : "")
+    );
+  }; */
+
   //checking auth changes and setting the user
   useEffect(() => {
     //only listen to this on mounting a component
@@ -49,11 +64,16 @@ export const UserAuthProvider = ({ children }) => {
     const unsubscribte = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       localStorage.setItem("user", JSON.stringify(currentUser)); // otherwise on refresh will loose the user(so set the user from localstoreage and initilalize on render in usestate above)
+      /*  getUserDetails(currentUser.uid); */
     });
     return () => {
       unsubscribte(); //cleanup
     };
   }, []);
+
+  /* const addToUsers = async (newUser) => {
+    await addDoc(usersCollection, newUser);
+  }; */
 
   return (
     <UserAuthContext.Provider

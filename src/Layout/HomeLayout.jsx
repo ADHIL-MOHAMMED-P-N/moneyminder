@@ -7,8 +7,8 @@ import Sider from "antd/es/layout/Sider";
 const HomeLayout = () => {
   const headerStyle = {
     color: "#fff",
-    height: 64,
-    paddingInline: 50,
+    height: 55,
+    paddingInline: 25,
     lineHeight: "64px",
   };
   const contentStyle = {

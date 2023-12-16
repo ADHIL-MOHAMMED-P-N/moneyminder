@@ -35,3 +35,7 @@ code {
 .account-detailsCard .ant-card-head {
   background-color: #fcfcfc !important;
 }
+.ant-dropdown .ant-dropdown-menu {
+  border-radius: 0px;
+  padding: 0px;
+}

@@ -44,7 +44,7 @@ export function ExpenseProvider({ children }) {
   useEffect(() => {
     getAllExpense();
   }, [user]); //whene ever user changes run snap again(to filter data w.r.t user)
-  //because onsnap only run in 2 condition 1. when data changes 2. initial render , so inorder to run whene ever user changes(login logout) we need to add it as dependancy
+  //because onsnap(useeffect) only run in 2 condition 1. when data changes 2. initial render , so inorder to run whene ever user changes(login logout) we need to add it as dependancy
 
   //add expense
   const addToExpense = async (newExp) => {

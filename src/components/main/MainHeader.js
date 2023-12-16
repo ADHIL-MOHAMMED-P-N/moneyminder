@@ -1,15 +1,50 @@
-import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Space, Typography } from "antd";
-import Search from "antd/es/input/Search";
-import { useNavigate } from "react-router-dom";
+import {
+  CaretDownOutlined,
+  DollarOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  UserAddOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Avatar, Button, Dropdown, Space, Typography } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContext";
 
 const { Title } = Typography;
 
 const MainHeader = () => {
-  const onSearch = () => console.log("Search");
   const navigate = useNavigate();
   const { user } = useUserAuth();
+
+  const items = [
+    {
+      key: "1",
+      label: (
+        <Link to="/login">
+          <LoginOutlined style={{ marginRight: 10 }} /> Log In
+        </Link>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Link to="/signup">
+          <UserAddOutlined style={{ marginRight: 10 }} />
+          SignUp
+        </Link>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Button style={{ color: "red" }}>
+          <LogoutOutlined style={{ marginRight: 10 }} />
+          Logout
+        </Button>
+      ),
+    },
+  ];
+
   return (
     <>
       <div
@@ -21,23 +56,21 @@ const MainHeader = () => {
         }}
       >
         <div>
-          <Title style={{ color: "white", margin: 0 }} level={5}>
-            MoneyMinder
-          </Title>
+          <Space align="center">
+            <DollarOutlined style={{ fontSize: 25, marginTop: 25 }} />
+            <Title style={{ color: "white", margin: 0 }} level={4}>
+              MoneyMinder
+            </Title>
+          </Space>
         </div>
         <div>
           <div style={{ display: "flex", alignItems: "center" }}>
-            {/*   <Search
-              placeholder="input search text"
-              onSearch={onSearch}
-              enterButton
-              style={{ marginRight: 15 }}
-            /> */}
-            <p style={{ fontSize: 16, fontWeight: "500", marginRight: 15 }}>
-              {user ? user.email : "User"}
-            </p>
             <Avatar
-              style={{ backgroundColor: "#fde3cf", color: "#f56a00" }}
+              style={{
+                backgroundColor: "#fde3cf",
+                color: "#f56a00",
+                marginRight: 10,
+              }}
               shape="circle"
               onClick={() => {
                 navigate("/login");
@@ -45,6 +78,30 @@ const MainHeader = () => {
               icon={<UserOutlined />}
               src={user.photoURL}
             />
+            <p style={{ fontSize: 14, fontWeight: "400", marginRight: 10 }}>
+              {user.displayName ? user.displayName : user.email}
+            </p>
+            <Dropdown
+              trigger={["click"]}
+              menu={{
+                items,
+              }}
+              placement="topRight"
+            >
+              <Button
+                style={{
+                  padding: 0,
+                  background: "none",
+                  height: 25,
+                  width: 25,
+                  borderRadius: "50%",
+                  border: "none",
+                }}
+              >
+                {/*  <DownOutlined style={{ fontSize: 15, color: "white" }} /> */}
+                <CaretDownOutlined style={{ fontSize: 15, color: "white" }} />
+              </Button>
+            </Dropdown>
           </div>
         </div>
       </div>
