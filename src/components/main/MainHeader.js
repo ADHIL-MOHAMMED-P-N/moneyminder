@@ -72,9 +72,11 @@ const MainHeader = () => {
         <div>
           <Space align="center">
             <DollarOutlined style={{ fontSize: 25, marginTop: 25 }} />
-            <Title style={{ color: "white", margin: 0 }} level={4}>
-              MoneyMinder
-            </Title>
+            <Link to="dashboard">
+              <Title style={{ color: "white", margin: 0 }} level={4}>
+                MoneyMinder
+              </Title>
+            </Link>
           </Space>
         </div>
         <div>
@@ -92,9 +94,17 @@ const MainHeader = () => {
               icon={<UserOutlined />}
               src={user.photoURL}
             />
-            <p style={{ fontSize: 14, fontWeight: "400", marginRight: 10 }}>
-              {user.displayName ? user.displayName : user.email}
-            </p>
+            <Link to="account" style={{ color: "white" }}>
+              <p
+                style={{
+                  fontSize: 14,
+                  fontWeight: "400",
+                  marginRight: 10,
+                }}
+              >
+                {user.displayName ? user.displayName : user.email}
+              </p>
+            </Link>
             <Dropdown
               trigger={["click"]}
               menu={{
