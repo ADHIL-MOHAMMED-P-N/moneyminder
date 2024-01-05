@@ -15,6 +15,16 @@ const { Title } = Typography;
 const MainHeader = () => {
   const navigate = useNavigate();
   const { user } = useUserAuth();
+  const { logOut } = useUserAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const items = [
     {
@@ -37,8 +47,12 @@ const MainHeader = () => {
     {
       key: "3",
       label: (
-        <Button style={{ color: "red" }}>
-          <LogoutOutlined style={{ marginRight: 10 }} />
+        <Button
+          onClick={handleLogout}
+          className="logout_btn"
+          style={{ color: "red" }}
+        >
+          <LogoutOutlined style={{ marginRight: 5 }} />
           Logout
         </Button>
       ),

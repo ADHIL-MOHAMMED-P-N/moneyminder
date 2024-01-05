@@ -39,3 +39,8 @@ code {
   border-radius: 0px;
   padding: 0px;
 }
+.logout_btn {
+  border: 0;
+  width: 100%;
+  padding: 0;
+}
