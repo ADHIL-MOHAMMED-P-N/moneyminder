@@ -14,6 +14,7 @@ code {
 .custom-sidemenu.ant-menu {
   height: 100%;
 }
+
 /* colours used */
 :root {
   --color-blue: #1677ff;
@@ -43,4 +44,7 @@ code {
   border: 0;
   width: 100%;
   padding: 0;
+}
+.custom-sidemenu .ant-menu-item {
+  border-radius: 0px;
 }

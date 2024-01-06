@@ -6,9 +6,10 @@ import {
   UserAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Button, Dropdown, Space, Typography } from "antd";
+import { Avatar, Button, Dropdown, Modal, Space, Typography } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContext";
+import { useState } from "react";
 
 const { Title } = Typography;
 
@@ -16,6 +17,7 @@ const MainHeader = () => {
   const navigate = useNavigate();
   const { user } = useUserAuth();
   const { logOut } = useUserAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -24,6 +26,17 @@ const MainHeader = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    handleLogout();
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   const items = [
@@ -47,14 +60,16 @@ const MainHeader = () => {
     {
       key: "3",
       label: (
-        <Button
-          onClick={handleLogout}
-          className="logout_btn"
-          style={{ color: "red" }}
-        >
-          <LogoutOutlined style={{ marginRight: 5 }} />
-          Logout
-        </Button>
+        <>
+          <Button
+            onClick={showModal}
+            className="logout_btn"
+            style={{ color: "red" }}
+          >
+            <LogoutOutlined style={{ marginRight: 5 }} />
+            Logout
+          </Button>
+        </>
       ),
     },
   ];
@@ -129,6 +144,24 @@ const MainHeader = () => {
           </div>
         </div>
       </div>
+
+      {/* modal on logout */}
+      <Modal
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            No
+          </Button>,
+          <Button key="submit" type="primary" danger onClick={handleOk}>
+            Yes
+          </Button>,
+        ]}
+        title="Logout"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>Are you sure you want to logout of your account</p>
+      </Modal>
     </>
   );
 };
