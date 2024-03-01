@@ -1,5 +1,7 @@
 /* summary card about income spending balance: used in dahsboard */
 import { Card, Typography } from "antd";
+import GraphUpImage from "../../assets/img/graphup.png";
+import GraphDownImage from "../../assets/img/graphdown.png";
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -32,6 +34,7 @@ const Percentage = ({ percentage }) => {
   return (
     <>
       <p
+        className="text-center"
         style={{
           ...paraStyle,
           color: percentage >= 0 ? "green" : "red",
@@ -40,6 +43,11 @@ const Percentage = ({ percentage }) => {
       >
         {`${percentage} %`}
       </p>
+      <img
+        src={percentage >= 0 ? GraphUpImage : GraphDownImage}
+        alt="graph"
+        className="w-28"
+      />
     </>
   );
 };
@@ -78,6 +86,7 @@ const SummaryCard = ({ subtitle, transaction, paraValue, percentage }) => {
   return (
     <>
       <Card
+        className="border-radius-0 summary__card"
         size="small"
         loading={false}
         title={

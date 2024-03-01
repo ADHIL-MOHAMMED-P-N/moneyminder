@@ -113,6 +113,7 @@ const TransactionStatistics = ({ income, expense }) => {
   return (
     <div>
       <Card
+        className="transaction__statisticsCard"
         size="small"
         loading={false}
         title={<CardTitle />}

@@ -49,6 +49,7 @@ const BalanceCard = ({ income, expense }) => {
   return (
     <div>
       <Card
+        className="balance__card"
         size="small"
         loading={false}
         title={<CardTop balance={balance} />}
@@ -61,9 +62,10 @@ const BalanceCard = ({ income, expense }) => {
         <Space>
           <Link to="/expense">
             <Button
+              className="border-radius-0 border-none"
               style={{
-                backgroundColor: "lightgreen",
-                color: "green",
+                backgroundColor: "#fcebeb",
+                color: "red",
                 fontWeight: "bold",
               }}
               icon={<WalletOutlined />}
@@ -73,9 +75,10 @@ const BalanceCard = ({ income, expense }) => {
           </Link>
           <Link to="/income">
             <Button
+              className="border-radius-0 border-none"
               style={{
-                backgroundColor: "#FF9595",
-                color: "red",
+                backgroundColor: "#e9f9f1",
+                color: "green",
                 fontWeight: "bold",
               }}
               icon={<DollarOutlined />}
