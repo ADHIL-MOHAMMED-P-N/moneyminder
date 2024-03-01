@@ -19,8 +19,6 @@ const HomeLayout = () => {
     color: "#fff",
   };
   const footerStyle = {
-    /*    position: "sticky",
-    bottom: 0, */
     backgroundColor: "#001529",
     color: "#fff",
   };
@@ -36,7 +34,7 @@ const HomeLayout = () => {
         <Content style={contentStyle}>
           <div
             style={{
-              padding: 40,
+              padding: 10,
             }}
           >
             <Outlet />

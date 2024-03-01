@@ -72,15 +72,7 @@ const LoginPage = () => {
       {contextHolder}
       {/* context for alert message */}
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "100vh",
-          backgroundColor: "#f5f5f5",
-        }}
-      >
+      <div>
         <Card
           size="small"
           style={{

@@ -11,7 +11,6 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
 import Error404 from "./pages/Error404";
-import Error500 from "./pages/Error500";
 import Account from "./pages/Account.js";
 import { ExpenseProvider } from "./context/ExpenseContext";
 import { IncomeProvider } from "./context/IncomeContext";
