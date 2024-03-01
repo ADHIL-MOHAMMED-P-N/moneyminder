@@ -1,9 +1,9 @@
-import { Button, Form, Input, Card, Typography, message } from "antd";
-import { GoogleOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Card, message } from "antd";
+import { DollarOutlined, GoogleOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
-const { Title } = Typography;
+import GoogleIcon from "../assets/icons/GoogleIcon";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -69,82 +69,106 @@ const LoginPage = () => {
 
   return (
     <>
-      {contextHolder}
       {/* context for alert message */}
+      {contextHolder}
 
-      <div>
-        <Card
-          size="small"
-          style={{
-            width: "100%",
-            maxWidth: 500,
-            paddingLeft: 10,
-            paddingRight: 10,
-          }}
-        >
-          <Title level={4} style={{ marginTop: 0 }}>
-            Log in
-          </Title>
-          <p>
-            Don't have an account ? <Link to={"/signup"}>Sing Up</Link>
-          </p>
-          <Form layout="vertical" size="large" autoComplete="off">
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[
-                {
-                  type: "email",
-                  required: true,
-                  message: "Please enter your email!",
-                },
-              ]}
-            >
-              <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-            </Form.Item>
-
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter your password!",
-                },
-              ]}
-            >
-              <Input.Password
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Item>
-
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
+      <div className="flex h-dvh">
+        <div className="flex-1 p-8">
+          <Link to="/dashboard" className="text-xl">
+            <DollarOutlined className="mr-2 text-2xl" />
+            MoneyMinder
+          </Link>
+          <div className="flex  items-center justify-center h-full relative">
+            <Card
+              className="border-none text-center"
+              size="small"
+              style={{
+                width: "100%",
+                maxWidth: 500,
+                paddingLeft: 10,
+                paddingRight: 10,
               }}
             >
+              <h2 className="text-3xl mb-2">Welcome Back</h2>
+              <p className="text-gray-400 text-lg mb-2">
+                Lets track your expenses together
+              </p>
+
+              <Form layout="vertical" size="large" autoComplete="off">
+                <Form.Item
+                  label="Email"
+                  name="email"
+                  rules={[
+                    {
+                      type: "email",
+                      required: true,
+                      message: "Please enter your email!",
+                    },
+                  ]}
+                >
+                  <Input
+                    className="rounded-none p-2 text-lg"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your password!",
+                    },
+                  ]}
+                >
+                  <Input.Password
+                    className="rounded-none p-2 text-lg"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Form.Item>
+
+                <Form.Item className="mt-7">
+                  <Button
+                    className=" w-full border loginbtn"
+                    onClick={submitHandler}
+                    htmlType="submit"
+                  >
+                    Log in
+                  </Button>
+                </Form.Item>
+              </Form>
               <Button
-                onClick={submitHandler}
-                type="primary"
-                htmlType="submit"
-                style={{ marginTop: 10 }}
+                className="mt-7  login__googleBtn flex justify-center"
+                icon={<GoogleIcon />}
+                block
+                size="large"
+                onClick={googleHandler}
               >
-                Log in
+                Login With Google
               </Button>
-            </Form.Item>
-          </Form>
-          <Button
-            type="primary"
-            block
-            icon={<GoogleOutlined />}
-            size="large"
-            onClick={googleHandler}
-          >
-            Login With Google
-          </Button>
-        </Card>
+            </Card>
+            <p className="absolute bottom-10">
+              <span className="text-gray-400">Don't have an account ?</span>{" "}
+              <Link className="font-semibold" to={"/signup"}>
+                Sing Up
+              </Link>
+            </p>
+          </div>
+        </div>
+        <div className="flex-1 h-100-dvh bg-teal-200 loginbg p-8 relative">
+          <h1 className="text-4xl font-bold text-right">MoneyMinder</h1>
+          <div className="absolute bottom-4">
+            <h1 className="text-4xl font-bold mb-4">MoneyMinder</h1>
+            <p className="text-lg ">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
+              quibusdam tempora nisi, voluptatibus magni porro tenetur non et
+              nostrum blanditiis.
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );

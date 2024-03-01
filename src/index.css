@@ -52,3 +52,35 @@ code {
 .custom-sidemenu .ant-menu-item {
   border-radius: 0px;
 }
+/* login in page */
+
+.loginbg {
+  background-image: url("./assets/img/login.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.ant-form-item-label > label {
+  font-weight: 500;
+}
+.loginbtn {
+  border-radius: 0px !important;
+  background-color: black;
+  color: white;
+  border-color: black !important  ;
+}
+.loginbtn:hover {
+  background-color: rgb(77, 77, 77);
+  color: white !important;
+}
+.login__googleBtn {
+  border-radius: 0px !important;
+  border-color: black !important  ;
+  background-color: white;
+  color: black;
+}
+.login__googleBtn:hover {
+  background-color: rgb(230, 230, 230);
+  color: black !important;
+}
