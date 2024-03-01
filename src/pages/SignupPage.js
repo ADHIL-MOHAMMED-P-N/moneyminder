@@ -1,13 +1,14 @@
-import { Button, Form, Input, Card, Typography, message } from "antd";
+import { Button, Form, Input, Card, message } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
-const { Title } = Typography;
+import { DollarOutlined } from "@ant-design/icons";
+import GoogleIcon from "../assets/icons/GoogleIcon";
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signUp } = useUserAuth();
+  const { signUp, googleLogin } = useUserAuth();
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -19,13 +20,32 @@ const SignupPage = () => {
     });
   };
 
+  //success message
+  const key = "success";
+  const successMessage = () => {
+    messageApi.open({
+      key,
+      type: "loading",
+      content: "Logging In",
+    });
+    setTimeout(() => {
+      messageApi.open({
+        key,
+        type: "success",
+        content: "Log in success",
+        duration: 0.5,
+        onClose: () => navigate("/dashboard"),
+      });
+    }, 2000);
+  };
+
   //handle submit signup
   const submitHandler = async (e) => {
     /* change to onsubbmit on form  instead of onclick in button */
     e.preventDefault();
     try {
       await signUp(email, password);
-      navigate("/dashboard");
+      successMessage(); //this function has navigate(to dashboard)
     } catch (error) {
       console.log(error.message);
       /*  setError(error.message); */ //check why setting error state is not working(problem:on intial error its coming as empty string)
@@ -33,86 +53,124 @@ const SignupPage = () => {
     }
   };
 
+  //login with google
+
+  const googleHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await googleLogin();
+      successMessage();
+    } catch (error) {
+      console.log(error.message);
+      errorMessage(error.message);
+    }
+  };
+
   return (
     <>
       {contextHolder}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "100vh",
-          backgroundColor: "#f5f5f5",
-        }}
-      >
-        <Card
-          size="small"
-          style={{
-            width: "100%",
-            maxWidth: 500,
-            paddingLeft: 10,
-            paddingRight: 10,
-          }}
-        >
-          <Title level={4} style={{ marginTop: 0 }}>
-            Sign Up
-          </Title>
-          <p>
-            Already have an account ? <Link to={"/login"}>Log in</Link>
-          </p>
-          <Form
-            layout="vertical"
-            size="large"
-            autoComplete="off"
-            onFinish={submitHandler}
-          >
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[
-                {
-                  type: "email",
-                  required: true,
-                  message: "Please enter your email!",
-                },
-              ]}
-            >
-              <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-            </Form.Item>
-
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter your password!",
-                },
-              ]}
-            >
-              <Input.Password
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Item>
-
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
+      <div className="flex h-dvh">
+        <div className="flex-1 p-8">
+          <Link to="/dashboard" className="text-xl">
+            <DollarOutlined className="mr-2 text-2xl" />
+            MoneyMinder
+          </Link>
+          <div className="flex  items-center justify-center h-full relative">
+            <Card
+              className="border-none text-center"
+              size="small"
+              style={{
+                width: "100%",
+                maxWidth: 500,
+                paddingLeft: 10,
+                paddingRight: 10,
               }}
             >
-              <Button
-                onClick={submitHandler}
-                type="primary"
-                htmlType="submit"
-                style={{ marginTop: 10 }}
+              <h2 className="text-3xl mb-2">Hi There - Register New User</h2>
+              <p className="text-gray-400 text-lg mb-2">
+                Lets track your expenses together
+              </p>
+              <Form
+                layout="vertical"
+                size="large"
+                autoComplete="off"
+                onFinish={submitHandler}
               >
-                Sign Up
+                <Form.Item
+                  label="Email"
+                  name="email"
+                  rules={[
+                    {
+                      type: "email",
+                      required: true,
+                      message: "Please enter your email!",
+                    },
+                  ]}
+                >
+                  <Input
+                    className="rounded-none p-2 text-lg"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your password!",
+                    },
+                  ]}
+                >
+                  <Input.Password
+                    className="rounded-none p-2 text-lg"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Form.Item>
+
+                <Form.Item className="mt-7">
+                  <Button
+                    className="w-full border loginbtn"
+                    onClick={submitHandler}
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Sign Up
+                  </Button>
+                </Form.Item>
+              </Form>
+              <Button
+                className="mt-7  login__googleBtn flex justify-center"
+                icon={<GoogleIcon />}
+                block
+                size="large"
+                onClick={googleHandler}
+              >
+                Sign In With Google
               </Button>
-            </Form.Item>
-          </Form>
-        </Card>
+            </Card>
+            <p className="absolute bottom-10">
+              <span className="text-gray-400">Already have an account ?</span>{" "}
+              <Link className="font-semibold" to={"/login"}>
+                Log In
+              </Link>
+            </p>
+          </div>
+        </div>
+        <div className="flex-1 h-100-dvh bg-teal-200 loginbg p-8 relative">
+          <h1 className="text-4xl font-bold text-right">MoneyMinder</h1>
+          <div className="absolute bottom-4">
+            <h1 className="text-4xl font-bold mb-4">MoneyMinder</h1>
+            <p className="text-lg ">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
+              quibusdam tempora nisi, voluptatibus magni porro tenetur non et
+              nostrum blanditiis.
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -89,7 +89,7 @@ const LoginPage = () => {
                 paddingRight: 10,
               }}
             >
-              <h2 className="text-3xl mb-2">Welcome Back</h2>
+              <h2 className="text-3xl mb-2">Welcome Back - Login</h2>
               <p className="text-gray-400 text-lg mb-2">
                 Lets track your expenses together
               </p>
@@ -132,7 +132,7 @@ const LoginPage = () => {
 
                 <Form.Item className="mt-7">
                   <Button
-                    className=" w-full border loginbtn"
+                    className="w-full border loginbtn"
                     onClick={submitHandler}
                     htmlType="submit"
                   >
@@ -147,7 +147,7 @@ const LoginPage = () => {
                 size="large"
                 onClick={googleHandler}
               >
-                Login With Google
+                Sign In With Google
               </Button>
             </Card>
             <p className="absolute bottom-10">
