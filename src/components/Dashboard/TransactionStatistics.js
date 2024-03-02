@@ -113,7 +113,7 @@ const TransactionStatistics = ({ income, expense }) => {
   return (
     <div>
       <Card
-        className="transaction__statisticsCard"
+        className="transaction__statisticsCard border-radius-0 shadow"
         size="small"
         loading={false}
         title={<CardTitle />}

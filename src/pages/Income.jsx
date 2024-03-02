@@ -17,11 +17,11 @@ const Income = () => {
   return (
     <div>
       <Title level={4}>Add Income</Title>
-      <Row gutter={24}>
-        <Col span={12}>
+      <Row gutter={10}>
+        <Col span={10}>
           <AddIncome />
         </Col>
-        <Col span={12}>
+        <Col span={14}>
           <LineChart type="income" transaction={income} />
         </Col>
       </Row>

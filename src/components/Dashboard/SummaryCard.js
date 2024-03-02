@@ -86,7 +86,7 @@ const SummaryCard = ({ subtitle, transaction, paraValue, percentage }) => {
   return (
     <>
       <Card
-        className="border-radius-0 summary__card"
+        className="border-radius-0 summary__card shadow"
         size="small"
         loading={false}
         title={

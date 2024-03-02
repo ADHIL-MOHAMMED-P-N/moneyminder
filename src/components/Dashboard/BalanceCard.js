@@ -49,7 +49,7 @@ const BalanceCard = ({ income, expense }) => {
   return (
     <div>
       <Card
-        className="balance__card"
+        className="balance__card border-radius-0 shadow"
         size="small"
         loading={false}
         title={<CardTop balance={balance} />}

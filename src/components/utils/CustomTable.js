@@ -164,6 +164,7 @@ const CustomTable = ({ data }) => {
   return (
     <>
       <Table
+        className="shadow"
         /*         onRow={(record) => {
           return {
             onClick: (event) => {

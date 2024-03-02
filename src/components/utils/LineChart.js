@@ -60,16 +60,35 @@ const LineChart = ({ transaction, type }) => {
       {
         label: type === "expense" ? "Expense" : "Income",
         data: dailyTransaction.map((item) => item.amount),
-        backgroundColor: "#b5cef2",
+        backgroundColor: type === "income" ? "#e9f9f1" : "#fcebeb",
+        borderColor: type === "income" ? "#1ca748" : "#f10509",
         borderRadius: 2,
-        tension: 0.4,
+        tension: 0.2,
         borderWidth: 2,
+        pointRadius: 0,
+        fill: true,
       },
     ],
   };
   return (
-    <Card>
-      <Line data={chartData} />
+    <Card className="border-radius-0 shadow">
+      <Line
+        options={{
+          scales: {
+            x: {
+              grid: {
+                display: false,
+              },
+            },
+            y: {
+              grid: {
+                display: false,
+              },
+            },
+          },
+        }}
+        data={chartData}
+      />
     </Card>
   );
 };
