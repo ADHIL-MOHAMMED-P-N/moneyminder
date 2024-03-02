@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import ExpenseContext from "../context/ExpenseContext";
 import CustomTable from "../components/utils/CustomTable";
 import AddExpense from "../components/expense/AddExpense";
@@ -17,11 +17,11 @@ const Expense = () => {
   return (
     <div>
       <Title level={4}>Add Expense</Title>
-      <Row gutter={24}>
-        <Col span={12}>
+      <Row gutter={10}>
+        <Col span={10}>
           <AddExpense />
         </Col>
-        <Col span={12}>
+        <Col span={14}>
           <LineChart type="expense" transaction={expense} />
         </Col>
       </Row>

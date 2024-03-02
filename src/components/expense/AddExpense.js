@@ -44,6 +44,7 @@ const AddExpense = () => {
     <>
       <div>
         <Card
+          className="border-radius-0 shadow"
           size="small"
           loading={false}
           style={{ paddingLeft: 10, paddingRight: 10 }}
@@ -58,6 +59,7 @@ const AddExpense = () => {
               ]}
             >
               <Input
+                className="rounded-none p-2 "
                 type="text"
                 placeholder="Eg: Food"
                 value={name}
@@ -66,9 +68,10 @@ const AddExpense = () => {
                 }}
               />
             </Form.Item>
-            <Space size="large">
-              <Form.Item label="Amount">
+            <div className="flex space-x-4 items-center">
+              <Form.Item label="Amount" className="flex-1">
                 <Input
+                  className="rounded-none p-2 "
                   type="number"
                   placeholder="Eg: 50"
                   value={amount}
@@ -78,11 +81,16 @@ const AddExpense = () => {
                 />
               </Form.Item>
               <Form.Item label="DatePicker">
-                <DatePicker value={date} onChange={datePickerHandler} />
+                <DatePicker
+                  className="rounded-none p-2 "
+                  value={date}
+                  onChange={datePickerHandler}
+                />
               </Form.Item>
-            </Space>
+            </div>
             <Form.Item label="Note">
               <Input
+                className="rounded-none p-2 "
                 type="text"
                 placeholder="Write note about this expense"
                 value={note}
@@ -93,7 +101,8 @@ const AddExpense = () => {
             </Form.Item>
             <Form.Item style={{ marginTop: 25 }}>
               <Button
-                type="primary"
+                block
+                className="border-radius-0 bg-blue-500 border-none text-white  hover:bg-blue-400 btn-primary"
                 onClick={
                   submitHandler
                 } /* best practice is no give a onsubmit in form tag */

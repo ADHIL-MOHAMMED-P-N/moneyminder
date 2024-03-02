@@ -97,3 +97,10 @@ code {
 .balance__card .ant-card-head {
   border-bottom: 0px;
 }
+/* Expense page */
+.ant-picker-panel-container {
+  border-radius: 0px;
+}
+.btn-primary:hover {
+  color: white !important;
+}
