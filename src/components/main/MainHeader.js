@@ -62,11 +62,11 @@ const MainHeader = () => {
       label: (
         <>
           <Button
+            icon={<LogoutOutlined style={{ marginRight: 3 }} />}
             onClick={showModal}
             className="logout_btn"
             style={{ color: "red" }}
           >
-            <LogoutOutlined style={{ marginRight: 5 }} />
             Logout
           </Button>
         </>

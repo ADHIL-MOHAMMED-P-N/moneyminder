@@ -1,5 +1,5 @@
 import { Link, useNavigate, NavLink, useLocation } from "react-router-dom";
-import { Button, Menu } from "antd";
+import { Button, Menu, Modal } from "antd";
 import {
   AreaChartOutlined,
   DollarOutlined,
@@ -7,10 +7,13 @@ import {
   UserOutlined,
   WalletOutlined,
   UsergroupAddOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 import { useUserAuth } from "../../context/UserAuthContext";
+import { useState } from "react";
 
 const MainSideNav = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { logOut } = useUserAuth();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -28,6 +31,18 @@ const MainSideNav = () => {
       console.log(error);
     }
   };
+  /* modal */
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    handleLogout();
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const menuItems = [
     {
       key: "/dashboard",
@@ -104,17 +119,45 @@ const MainSideNav = () => {
     },
     {
       key: "/logout",
-      label: <Button onClick={handleLogout}>logout</Button>,
-      icon: <UserOutlined />,
+      label: (
+        <Button
+          danger
+          className="logout_btn text-left shadow-none "
+          onClick={showModal}
+          icon={<LogoutOutlined style={{ marginRight: 2 }} />}
+        >
+          Logout
+        </Button>
+      ),
     },
   ];
   return (
-    <Menu
-      defaultSelectedKeys={[pathname]} //otherwise when refresh or in manual setting of routes the selected styles will lose
-      className="custom-sidemenu"
-      items={menuItems}
-      mode="inline"
-    />
+    <>
+      <Menu
+        defaultSelectedKeys={[pathname]} //otherwise when refresh or in manual setting of routes the selected styles will lose
+        className="custom-sidemenu"
+        items={menuItems}
+        mode="inline"
+      />
+
+      {/* modal on logout */}
+      <Modal
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            No
+          </Button>,
+          <Button key="submit" type="primary" danger onClick={handleOk}>
+            Yes
+          </Button>,
+        ]}
+        title="Logout"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <p>Are you sure you want to logout of your account</p>
+      </Modal>
+    </>
   );
 };
 
