@@ -1,7 +1,6 @@
 import { Avatar, Card, Col, Row, Typography } from "antd";
 import { SettingOutlined, UserOutlined } from "@ant-design/icons";
 import { useUserAuth } from "../context/UserAuthContext";
-import create from "@ant-design/icons/lib/components/IconFont";
 
 const { Title } = Typography;
 const Account = () => {
@@ -19,7 +18,11 @@ const Account = () => {
     <div>
       <Row gutter={20}>
         <Col span={8}>
-          <Card style={{ borderRadius: 0 }} size="small">
+          <Card
+            style={{ borderRadius: 0 }}
+            size="small"
+            className="border-radius-0 shadow"
+          >
             <div
               style={{
                 display: "flex",
@@ -51,7 +54,7 @@ const Account = () => {
         </Col>
         <Col span={16}>
           <Card
-            className="account-detailsCard"
+            className="account-detailsCard border-radius-0 shadow"
             style={{ borderRadius: 0 }}
             size="small"
             extra={<SettingOutlined />}
