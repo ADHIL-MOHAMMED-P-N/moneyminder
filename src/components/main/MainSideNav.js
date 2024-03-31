@@ -17,7 +17,7 @@ const MainSideNav = () => {
   const { logOut } = useUserAuth();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log(pathname);
+
   const activeStyle = {
     fontWeight: 500,
     color: "#1677ff",

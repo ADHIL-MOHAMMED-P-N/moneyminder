@@ -5,7 +5,7 @@ import { useUserAuth } from "../context/UserAuthContext";
 const { Title } = Typography;
 const Account = () => {
   const { user } = useUserAuth();
-  console.log(user);
+
   const createdAt = user.metadata ? new Date(user.metadata.creationTime) : null;
   const paraStyle = {
     fontWeight: 400,
