@@ -41,10 +41,10 @@ const Dashboard = () => {
       </Row>
       {/* Row - 2 Table and saving plans */}
       <Row>
-        <Col span={16}>
+        <Col span={24}>
           <RecentTransactionTable />
         </Col>
-        <Col span={8}></Col>
+        {/* <Col span={8}></Col> */}
       </Row>
     </>
   );

@@ -24,7 +24,7 @@ export function IncomeProvider({ children }) {
     description: "Sold stocks for profit.",
   } */
 
-  //get all income - realtime collection -firebase
+  //get all income - realtime collection -firebase (no need to set setstate on other operations like addtoincome,edit,delete)
   //onsnapshot does not return promise (no need of async await)
   const incomeColl = collection(db, "income");
   const getAllIncome = () => {

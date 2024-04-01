@@ -48,13 +48,29 @@ const ActionDropdown = ({ record }) => {
   const items = [
     {
       key: "1",
-      label: <Button onClick={() => setIsEditModalOpen(true)}>Edit</Button>,
-      icon: <EditOutlined />,
+      label: (
+        <Button
+          block
+          icon={<EditOutlined />}
+          className="rounded-none"
+          onClick={() => setIsEditModalOpen(true)}
+        >
+          Edit
+        </Button>
+      ),
     },
     {
       key: "2",
-      label: <Button onClick={() => setIsDeleteModalOpen(true)}>Delete</Button>,
-      icon: <DeleteOutlined />,
+      label: (
+        <Button
+          block
+          icon={<DeleteOutlined />}
+          className="rounded-none"
+          onClick={() => setIsDeleteModalOpen(true)}
+        >
+          Delete
+        </Button>
+      ),
     },
   ];
   return (

@@ -1,7 +1,7 @@
 import { Card, Typography, Space, Button, Progress, Tooltip } from "antd";
 import { DollarOutlined, WalletOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const { Title } = Typography;
 
 const paraStyle = { margin: 0, fontWeight: 400, color: "rgba(0, 0, 0, 0.45)" };
@@ -24,28 +24,61 @@ const CardTop = ({ balance }) => {
 };
 
 const BalanceCard = ({ income, expense }) => {
+  /* code refactor ------------------- */
+  const month = new Date().getMonth(); //0 index based
+
+  const calculateCurrentMonthAmount = (transaction) => {
+    return transaction
+      .filter((item) => new Date(item.date).getMonth() === month)
+      .reduce((acc, item) => acc + item.amount, 0)
+      .toFixed(2);
+  };
+
+  const [balance, setBalance] = useState(0);
+  const [percentage, setPercentage] = useState(100); //monthly balance percent
+
+  useEffect(() => {
+    const currentMonthIncome = parseFloat(calculateCurrentMonthAmount(income));
+    const currentMonthExpense = parseFloat(
+      calculateCurrentMonthAmount(expense)
+    );
+    if (currentMonthIncome > 0) {
+      const spentPercentage = Math.round(
+        (currentMonthExpense / currentMonthIncome) * 100
+      );
+      setPercentage(100 - spentPercentage);
+    } else {
+      /* when income=0 & expene is there balance percentage=0 */
+      setPercentage(0);
+    }
+    const newBalance = currentMonthIncome - currentMonthExpense;
+    setBalance(newBalance.toFixed(2));
+  }, [income, expense, month]);
+  /* ---------------------------------------------------refactor */
   /* remove redudant code,  */
-  const month = new Date().getMonth();
-  const currentMonthIncome = income
+  // const month = new Date().getMonth(); //0 index based
+  /* const currentMonthIncome = income
+    .filter((item) => {
+      const date = new Date(item.date); // 0 index based
+      return date.getMonth() === month;
+    })
+    .reduce((acc, item) => acc + item.amount, 0)
+    .toFixed(2);
+ */
+  /*  const currentMonthExpense = expense
     .filter((item) => {
       const date = new Date(item.date);
       return date.getMonth() === month;
     })
     .reduce((acc, item) => acc + item.amount, 0)
     .toFixed(2);
-
-  const currentMonthExpense = expense
-    .filter((item) => {
-      const date = new Date(item.date);
-      return date.getMonth() === month;
-    })
-    .reduce((acc, item) => acc + item.amount, 0)
-    .toFixed(2);
-
-  const [balance, setBalance] = useState(
-    currentMonthIncome - currentMonthExpense
-  );
-
+ */
+  //  const balance = currentMonthIncome - currentMonthExpense;
+  //const [percentage, setPercentage] = useState(0);
+  /* const spentPercentage = Math.round(
+    (currentMonthExpense / currentMonthIncome) * 100
+  ); */
+  // const percentage = 100 - s  pentPercentage;
   return (
     <div>
       <Card
@@ -88,9 +121,15 @@ const BalanceCard = ({ income, expense }) => {
           </Link>
         </Space>
         <div style={{ marginTop: 10 }}>
-          <p style={paraStyle}>Balace Today</p>
-          <Tooltip title={30}>
-            <Progress percent={30} />
+          <p style={paraStyle}>Balace For This Month</p>
+          <Tooltip
+            title={
+              percentage > 0
+                ? `you have spend ${100 - percentage}% of your monthly income`
+                : "You have spend 100% or more of your monthly income"
+            }
+          >
+            <Progress percent={percentage} />
           </Tooltip>
         </div>
       </Card>

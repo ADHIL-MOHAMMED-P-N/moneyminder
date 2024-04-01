@@ -80,7 +80,7 @@ const MainSideNav = () => {
       ),
       icon: <DollarOutlined />,
     },
-    {
+    /*  {
       key: "/borrowings",
       label: (
         <NavLink
@@ -91,7 +91,7 @@ const MainSideNav = () => {
         </NavLink>
       ),
       icon: <UsergroupAddOutlined />,
-    },
+    }, */
     {
       key: "/report",
       label: (

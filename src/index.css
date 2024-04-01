@@ -23,6 +23,7 @@ code {
 :root {
   --color-blue: #1677ff;
   --color-blue: #b5cef2;
+  --color-danger: #ff4d4f;
 }
 /* ant-d modifications */
 .ant-table-cell {
@@ -51,6 +52,20 @@ code {
 }
 .custom-sidemenu .ant-menu-item {
   border-radius: 0px;
+}
+
+.ant-modal-footer button {
+  border-radius: 0px;
+}
+.ant-modal-footer .ant-btn-primary {
+  background-color: #ff4d4f;
+}
+.ant-modal-footer .ant-btn-primary:hover {
+  background-color: #ff4d4f !important;
+  opacity: 0.8;
+}
+.ant-modal-content {
+  border-radius: 0px !important;
 }
 /* login in page */
 
