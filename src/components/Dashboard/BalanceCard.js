@@ -16,9 +16,9 @@ const CardTop = ({ balance }) => {
       >
         ${balance}
       </Title>
-      <p style={paraStyle}>
+      {/*   <p style={paraStyle}>
         Balace Last Month<span style={{ color: "#000" }}> $11,000</span>
-      </p>
+      </p> */}
     </>
   );
 };
@@ -46,13 +46,15 @@ const BalanceCard = ({ income, expense }) => {
       const spentPercentage = Math.round(
         (currentMonthExpense / currentMonthIncome) * 100
       );
-      setPercentage(100 - spentPercentage);
+      setPercentage(100 - spentPercentage); //balance per = 100 - spent perc
     } else {
       /* when income=0 & expene is there balance percentage=0 */
       setPercentage(0);
     }
     const newBalance = currentMonthIncome - currentMonthExpense;
     setBalance(newBalance.toFixed(2));
+
+    /*last month balance*/
   }, [income, expense, month]);
   /* ---------------------------------------------------refactor */
   /* remove redudant code,  */
@@ -86,7 +88,7 @@ const BalanceCard = ({ income, expense }) => {
         size="small"
         loading={false}
         title={<CardTop balance={balance} />}
-        extra={<p style={{ ...paraStyle, fontSize: 12 }}>From Last Month</p>}
+        /*    extra={<p style={{ ...paraStyle, fontSize: 12 }}>From Last Month</p>} */
         style={{
           /*   width: 300, */
           padding: 10,

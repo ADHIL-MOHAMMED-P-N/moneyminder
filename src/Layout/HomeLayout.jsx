@@ -3,6 +3,7 @@ import MainSideNav from "../components/main/MainSideNav";
 import MainHeader from "../components/main/MainHeader";
 import { Layout } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
+import MainFooter from "../components/main/MainFooter";
 import Sider from "antd/es/layout/Sider";
 const HomeLayout = () => {
   const headerStyle = {
@@ -21,6 +22,7 @@ const HomeLayout = () => {
   const footerStyle = {
     backgroundColor: "#001529",
     color: "#fff",
+    padding: 0,
   };
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -41,7 +43,9 @@ const HomeLayout = () => {
           </div>
         </Content>
       </Layout>
-      <Footer style={footerStyle}>Footer</Footer>
+      <Footer style={footerStyle}>
+        <MainFooter />
+      </Footer>
     </Layout>
   );
 };

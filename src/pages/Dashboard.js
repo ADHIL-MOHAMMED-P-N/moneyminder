@@ -18,18 +18,11 @@ const Dashboard = () => {
           <div style={{ marginBottom: 16 }}>
             <SummaryCard
               subtitle="Income"
-              percentage={20}
-              paraValue={"$8,219.00"}
               transaction={income} /* change to income */
             />
           </div>
           <div>
-            <SummaryCard
-              subtitle="Spending"
-              percentage={-12.2}
-              paraValue={"$6,241.00"}
-              transaction={expense}
-            />
+            <SummaryCard subtitle="Spending" transaction={expense} />
           </div>
         </Col>
         <Col span={8}>

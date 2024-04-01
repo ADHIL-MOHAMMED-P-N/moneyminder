@@ -19,30 +19,35 @@ const CardTitle = ({ title, subtitle }) => {
     </>
   );
 };
-const MetaDescription = ({ paraValue }) => {
+const MetaDescription = ({ paraValue, percentage }) => {
   return (
     <>
       <p style={paraStyle}>
-        Your balance bigger{" "}
-        <span style={{ color: "#1677ff" }}>{paraValue} </span>
-        last month
+        Last Month : <span style={{ color: "#1677ff" }}>{paraValue} </span>
       </p>
+      {!isNaN(percentage) && percentage && (
+        <p className="text-xs">
+          Percentage Change with respect to last month : {percentage} %
+        </p>
+      )}
     </>
   );
 };
 const Percentage = ({ percentage }) => {
   return (
     <>
-      <p
-        className="text-center"
-        style={{
-          ...paraStyle,
-          color: percentage >= 0 ? "green" : "red",
-          fontWeight: 500,
-        }}
-      >
-        {`${percentage} %`}
-      </p>
+      {!isNaN(percentage) && percentage && (
+        <p
+          className="text-center"
+          style={{
+            ...paraStyle,
+            color: percentage >= 0 ? "green" : "red",
+            fontWeight: 500,
+          }}
+        >
+          {`${percentage} %`}
+        </p>
+      )}
       <img
         src={percentage >= 0 ? GraphUpImage : GraphDownImage}
         alt="graph"
@@ -67,12 +72,12 @@ const Percentage = ({ percentage }) => {
     </div>
   );
 }; */
-const SummaryCard = ({ subtitle, transaction, paraValue, percentage }) => {
+const SummaryCard = ({ subtitle, transaction }) => {
   //finding current month
   const today = new Date();
-  const month = today.getMonth() + 1;
+  const month = today.getMonth();
   // finding monthlyexpense from all
-  const monthTransaction = transaction.filter((trans) => {
+  /*  const monthTransaction = transaction.filter((trans) => {
     const transDate = new Date(trans.date);
     const transMonth = transDate.getMonth() + 1;
     return transMonth === month;
@@ -81,7 +86,31 @@ const SummaryCard = ({ subtitle, transaction, paraValue, percentage }) => {
   const totalMonthTransaction = monthTransaction
     .map((item) => item.amount)
     .reduce((acc, item) => acc + item, 0)
-    .toFixed(2);
+    .toFixed(2); */
+  const calculatePercentageChange = (oldValue, newValue) => {
+    if (oldValue == 0) return null;
+    const change = newValue - oldValue;
+    const percentageChange = (change / oldValue) * 100;
+    return percentageChange.toFixed(2);
+  };
+
+  const calculateCurrentMonthAmount = (transaction, month) => {
+    return transaction
+      .filter((item) => new Date(item.date).getMonth() === month)
+      .reduce((acc, item) => acc + item.amount, 0)
+      .toFixed(2);
+  };
+
+  const totalMonthTransaction = calculateCurrentMonthAmount(transaction, month); //current
+  const previousMonthTransaction = calculateCurrentMonthAmount(
+    transaction,
+    month - 1
+  ); /* fix:make it work on jan (since its month is 0) */
+  const paraValue = previousMonthTransaction;
+  const percentage = calculatePercentageChange(
+    previousMonthTransaction,
+    totalMonthTransaction
+  );
 
   return (
     <>
@@ -98,7 +127,11 @@ const SummaryCard = ({ subtitle, transaction, paraValue, percentage }) => {
           padding: 10,
         }}
       >
-        <Meta description={<MetaDescription paraValue={paraValue} />} />
+        <Meta
+          description={
+            <MetaDescription paraValue={paraValue} percentage={percentage} />
+          }
+        />
       </Card>
     </>
   );
