@@ -13,15 +13,16 @@ const Income = () => {
     income.map((item) => ({ ...item, status: "income" }))
   );
   */
-
+  const monthName = new Date().toLocaleString("default", { month: "long" });
   return (
     <div>
-      <Title level={4}>Add Income</Title>
       <Row gutter={10}>
         <Col span={10}>
+          <Title level={4}>Add Income</Title>
           <AddIncome />
         </Col>
         <Col span={14}>
+          <Title level={4}>Month Income - {monthName}</Title>
           <LineChart type="income" transaction={income} />
         </Col>
       </Row>

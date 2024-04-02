@@ -12,16 +12,16 @@ const Expense = () => {
     expense.map((item) => ({ ...item, status: "expense" }))
   ); */
 
-  //line chart
-
+  const monthName = new Date().toLocaleString("default", { month: "long" });
   return (
     <div>
-      <Title level={4}>Add Expense</Title>
       <Row gutter={10}>
         <Col span={10}>
+          <Title level={4}>Add Expense</Title>
           <AddExpense />
         </Col>
         <Col span={14}>
+          <Title level={4}>Month Expenses - {monthName}</Title>
           <LineChart type="expense" transaction={expense} />
         </Col>
       </Row>

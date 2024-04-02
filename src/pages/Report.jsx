@@ -9,7 +9,7 @@ import IncomeContext from "../context/IncomeContext";
 const Report = () => {
   const { expense } = useContext(ExpenseContext);
   const { income } = useContext(IncomeContext);
-
+  const monthName = new Date().toLocaleString("default", { month: "long" });
   return (
     <>
       <Card
@@ -22,7 +22,7 @@ const Report = () => {
           <div>
             <h2 className="font-bold text-lg">Monthly Report</h2>
             <p className="text-base">
-              Download monthly income expense report of March
+              Download monthly income expense report of {monthName}
             </p>
           </div>
           <PDFDownloadLink
