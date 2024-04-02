@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Typography, Space } from "antd";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto"; /* mandatory import for showing chart */
@@ -23,40 +23,20 @@ const GraphIndex = () => {
     <Space>
       <Space align="baseline">
         <div style={{ ...circleStyle, backgroundColor: "#b5cef2" }}></div>
-        <p style={paraStyle}>spending</p>
+        <p style={paraStyle}>Expense</p>
       </Space>
       <Space align="baseline">
         <div style={{ ...circleStyle, backgroundColor: "#1677ff" }}></div>
-        <p style={paraStyle}>income</p>
+        <p style={paraStyle}>Income</p>
       </Space>
     </Space>
   );
 };
 
 const TransactionStatistics = ({ income, expense }) => {
-  const newInome = income.map((item) => {
-    return {
-      name: item.name,
-      amount: item.amount,
-      date: new Date(item.date),
-      desc: item.description,
-      status: "income",
-    };
-  });
-  const newExpense = expense.map((item) => {
-    return {
-      name: item.name,
-      amount: item.amount,
-      date: new Date(item.date),
-      desc: item.description,
-      status: "expense",
-    };
-  });
-  const transactionsCombined = newInome
-    .concat(newExpense)
-    .sort(function (a, b) {
-      return b.date - a.date;
-    });
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const today = new Date();
   const lastTransaction = [
     { month: "January", monthlyExpense: 0, monthlyIncome: 0 },
     { month: "February", monthlyExpense: 0, monthlyIncome: 0 },
@@ -72,27 +52,53 @@ const TransactionStatistics = ({ income, expense }) => {
     { month: "December", monthlyExpense: 0, monthlyIncome: 0 },
   ];
 
-  const today = new Date();
-  /*   console.log(transactionsCombined); */
-  /*  calculting the monthlyexpense and monthlyincome */
-  /* change logic into states and useeffects  */
-  for (let i = 0; i < transactionsCombined.length; i++) {
-    if (transactionsCombined[i].date.getFullYear() === today.getFullYear()) {
-      const transMonth = transactionsCombined[i].date.getMonth();
-      if (transactionsCombined[i].status === "expense") {
-        lastTransaction[transMonth].monthlyExpense +=
-          transactionsCombined[i].amount;
-      }
-      if (transactionsCombined[i].status === "income") {
-        lastTransaction[transMonth].monthlyIncome +=
-          transactionsCombined[i].amount;
+  useEffect(() => {
+    const newInome = income.map((item) => {
+      return {
+        name: item.name,
+        amount: item.amount,
+        date: new Date(item.date),
+        desc: item.description,
+        status: "income",
+      };
+    });
+    const newExpense = expense.map((item) => {
+      return {
+        name: item.name,
+        amount: item.amount,
+        date: new Date(item.date),
+        desc: item.description,
+        status: "expense",
+      };
+    });
+    const transactionsCombined = newInome
+      .concat(newExpense)
+      .sort(function (a, b) {
+        return b.date - a.date;
+      });
+
+    /*   console.log(transactionsCombined); */
+    /*  calculting the monthlyexpense and monthlyincome */
+    /* change logic into states and useeffects  */
+    for (let i = 0; i < transactionsCombined.length; i++) {
+      if (transactionsCombined[i].date.getFullYear() === today.getFullYear()) {
+        const transMonth = transactionsCombined[i].date.getMonth();
+        if (transactionsCombined[i].status === "expense") {
+          lastTransaction[transMonth].monthlyExpense +=
+            transactionsCombined[i].amount;
+        }
+        if (transactionsCombined[i].status === "income") {
+          lastTransaction[transMonth].monthlyIncome +=
+            transactionsCombined[i].amount;
+        }
       }
     }
-  }
+    setTransactions(lastTransaction);
+    setLoading(false);
+  }, [income, expense]);
 
   /*  console.log(lastTransaction); */
 
-  const [transactions, setTransactions] = useState(lastTransaction);
   const chartData = {
     labels: transactions.map((trans) => trans.month),
     datasets: [
@@ -113,9 +119,9 @@ const TransactionStatistics = ({ income, expense }) => {
   return (
     <div>
       <Card
+        loading={loading}
         className="transaction__statisticsCard border-radius-0 shadow"
         size="small"
-        loading={false}
         title={<CardTitle />}
         extra={<GraphIndex />}
         style={{
