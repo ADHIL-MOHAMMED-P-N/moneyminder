@@ -104,7 +104,6 @@ const ActionDropdown = ({ record }) => {
 };
 
 const CustomTable = ({ data }) => {
-  const navigate = useNavigate();
   const columns = [
     {
       title: (

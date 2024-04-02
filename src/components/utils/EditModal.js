@@ -2,6 +2,9 @@ import { DatePicker, Form, Input, Modal, Space } from "antd";
 import { useState, useContext } from "react";
 import ExpenseContext from "../../context/ExpenseContext";
 import IncomeContext from "../../context/IncomeContext";
+import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
+import locale from "antd/locale/zh_CN";
 
 const EditModal = ({
   isEditModalOpen,
@@ -11,7 +14,7 @@ const EditModal = ({
   const [name, setName] = useState(selectedTransaction.name);
   const [amount, setAmount] = useState(selectedTransaction.amount);
   const [note, setNote] = useState(selectedTransaction.description);
-  const [date, setDate] = useState(null); //later change to seletedtransactiondate(since selectedtransaction.date is string is throwing err )
+  const [date, setDate] = useState(dayjs(selectedTransaction.date)); //later change to seletedtransactiondate(since selectedtransaction.date is string is throwing err )
   const { editExpense } = useContext(ExpenseContext);
   const { editIncome } = useContext(IncomeContext);
 
@@ -78,7 +81,11 @@ const EditModal = ({
               />
             </Form.Item>
             <Form.Item label="DatePicker">
-              <DatePicker value={date} onChange={datePickerHandler} />
+              <DatePicker
+                value={date}
+                onChange={datePickerHandler}
+                /* defaultValue={dayjs(selectedTransaction.date, "YYYY-MM-DD")} */
+              />
             </Form.Item>
           </Space>
           <Form.Item label="Note">
