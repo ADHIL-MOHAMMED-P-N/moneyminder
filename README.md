@@ -1,6 +1,7 @@
 # MoneyMinder
 
 MoneyMinder is a powerful web application built using React.js & Firebase that empowers you to take control of your finances like never before. It's designed to be your one-stop solution for tracking your expenses and income, helping you make informed financial decisions with ease.
+![screencapture-moneyminder-red-vercel-app-dashboard-2024-04-08-16_13_39](https://github.com/ADHIL-MOHAMMED-P-N/moneyminder/assets/44119839/bf00bcd4-49cf-49f0-9386-30f2b45bac28)
 
 ## Features
 
