@@ -90,6 +90,16 @@ const SignupPage = () => {
               <p className="text-gray-400 text-lg mb-2">
                 Lets track your expenses together
               </p>
+              <p>For testing the application use below credentials and login</p>
+              <div className="flex justify-center space-x-3">
+                <p>
+                  email : <span className="font-semibold">test@gmail.com</span>
+                </p>
+                <p>
+                  password : <span className="font-semibold">test@1234</span>
+                </p>
+              </div>
+
               <Form
                 layout="vertical"
                 size="large"
@@ -160,14 +170,14 @@ const SignupPage = () => {
             </p>
           </div>
         </div>
-        <div className="flex-1 h-100-dvh bg-teal-200 loginbg p-8 relative">
-          <h1 className="text-4xl font-bold text-right">MoneyMinder</h1>
-          <div className="absolute bottom-4">
+        <div className="text-white flex-1 h-100-dvh bg-teal-200 loginbg p-8 flex justify-center items-center text-center">
+          <div>
             <h1 className="text-4xl font-bold mb-4">MoneyMinder</h1>
             <p className="text-lg ">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-              quibusdam tempora nisi, voluptatibus magni porro tenetur non et
-              nostrum blanditiis.
+              MoneyMinder is a powerful web application that empowers you to
+              take control of your finances like never before. It's designed to
+              be your one-stop solution for tracking your expenses and income,
+              helping you make informed financial decisions with ease.
             </p>
           </div>
         </div>

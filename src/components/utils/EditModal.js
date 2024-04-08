@@ -4,7 +4,6 @@ import ExpenseContext from "../../context/ExpenseContext";
 import IncomeContext from "../../context/IncomeContext";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
-import locale from "antd/locale/zh_CN";
 
 const EditModal = ({
   isEditModalOpen,
@@ -14,7 +13,7 @@ const EditModal = ({
   const [name, setName] = useState(selectedTransaction.name);
   const [amount, setAmount] = useState(selectedTransaction.amount);
   const [note, setNote] = useState(selectedTransaction.description);
-  const [date, setDate] = useState(dayjs(selectedTransaction.date)); //later change to seletedtransactiondate(since selectedtransaction.date is string is throwing err )
+  const [date, setDate] = useState(dayjs(selectedTransaction.date));
   const { editExpense } = useContext(ExpenseContext);
   const { editIncome } = useContext(IncomeContext);
 
